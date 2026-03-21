@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import AddToCartButton from "../../components/AddtoCartButton";
+import AddToCartButton from "../../components/AddToCartButton";
 import type { Product } from "../../types/product";
 
 export default function ProductsPage() {
