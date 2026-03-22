@@ -6,24 +6,12 @@ import Navbar from "../../components/Navbar";
 export default function CheckoutPage() {
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
-  const [notes, setNotes] = useState("");
+  const [details, setDetails] = useState("");
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    const order = {
-      id: Date.now(),
-      buyer: {
-        name,
-        country,
-      },
-      notes,
-      createdAt: new Date().toISOString(),
-    };
-
-    console.log(order);
-
-    alert("Pedido enviado (simulação)");
+    alert("Pedido enviado com sucesso");
   }
 
   return (
@@ -31,11 +19,15 @@ export default function CheckoutPage() {
       <Navbar />
 
       <section className="checkout-section">
-        <div className="checkout-box">
-          <h1>Solicitar cotação</h1>
+        <div className="checkout-container">
+          <div className="checkout-header">
+            <p className="checkout-label">Solicitação</p>
+            <h1>Solicitar cotação</h1>
+          </div>
 
           <form onSubmit={handleSubmit} className="checkout-form">
             <input
+              type="text"
               placeholder="Nome ou empresa"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -43,6 +35,7 @@ export default function CheckoutPage() {
             />
 
             <input
+              type="text"
               placeholder="País"
               value={country}
               onChange={(e) => setCountry(e.target.value)}
@@ -51,8 +44,10 @@ export default function CheckoutPage() {
 
             <textarea
               placeholder="Detalhes do pedido"
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
+              value={details}
+              onChange={(e) => setDetails(e.target.value)}
+              rows={5}
+              required
             />
 
             <button type="submit" className="primary-cta">

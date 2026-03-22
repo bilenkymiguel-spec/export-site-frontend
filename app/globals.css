@@ -63,12 +63,19 @@ select {
   border: 1px solid var(--color-border);
   padding: 12px 14px;
   outline: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
   border-color: var(--color-accent);
+  background: #121212;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
 }
 
 .site-shell {
@@ -129,7 +136,6 @@ select:focus {
   gap: 12px;
 }
 
-/* BOTÕES DO NAVBAR */
 .header-circle-button,
 .drawer-close-button {
   width: 44px;
@@ -352,6 +358,13 @@ select:focus {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.primary-cta:hover,
+.button-primary:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
 }
 
 /* LOGIN */
@@ -389,6 +402,63 @@ select:focus {
 .auth-form .primary-cta {
   width: 100%;
   margin-top: 6px;
+}
+
+/* CHECKOUT */
+.checkout-section {
+  padding: 80px 24px;
+}
+
+.checkout-container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.checkout-header {
+  margin-bottom: 32px;
+}
+
+.checkout-label {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 10px;
+}
+
+.checkout-header h1 {
+  font-size: 34px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.checkout-form .primary-cta {
+  width: 220px;
+  margin-top: 12px;
+}
+
+/* CONTATO */
+.contact-section {
+  padding: 80px 24px;
+}
+
+.contact-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.contact-card {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 24px;
 }
 
 /* FOOTER */
@@ -440,5 +510,18 @@ footer {
 
   .auth-box {
     padding: 24px;
+  }
+
+  .checkout-section,
+  .contact-section {
+    padding: 56px 16px;
+  }
+
+  .checkout-header h1 {
+    font-size: 28px;
+  }
+
+  .checkout-form .primary-cta {
+    width: 100%;
   }
 }
