@@ -1,89 +1,27 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { apiGet } from "../../../services/api";
-
-type ManagedPageVersion = {
-  id: number;
-  title: string;
-  slug: string;
-  content: string;
-  createdBy: number;
-  createdAt: string;
-  changeSummary?: string;
-};
-
-type ManagedPage = {
-  id: number;
-  title: string;
-  slug: string;
-  status: "draft" | "published" | "archived";
-  currentVersionId?: number;
-  versions: ManagedPageVersion[];
-  createdAt: string;
-  updatedAt?: string;
-};
-
 export default function AdminPagesPage() {
-  const [pages, setPages] = useState<ManagedPage[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    apiGet<ManagedPage[]>("/pages")
-      .then((data) => {
-        setPages(data);
-        setError(null);
-      })
-      .catch((err) => {
-        console.error(err);
-        setError("Não foi possível carregar as páginas.");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
-
   return (
-    <main style={{ padding: "40px" }}>
-      <h1>Administração de Páginas</h1>
+    <main className="min-h-screen bg-black px-6 py-16 text-white">
+      <div className="mx-auto max-w-5xl">
+        <p className="text-xs uppercase tracking-[0.35em] text-neutral-400">
+          Admin
+        </p>
 
-      {loading && <p>Carregando páginas...</p>}
-      {error && <p>{error}</p>}
+        <h1 className="mt-3 text-3xl font-light tracking-[0.08em]">
+          Gestão de Páginas
+        </h1>
 
-      {!loading && !error && pages.length === 0 && (
-        <p>Nenhuma página encontrada.</p>
-      )}
+        <p className="mt-4 max-w-2xl text-sm leading-7 text-neutral-300">
+          Esta área pode ser usada para organizar páginas editáveis, rascunhos,
+          versões originais e futuras pré-visualizações internas do projeto.
+        </p>
 
-      {!loading && !error && pages.length > 0 && (
-        <div style={{ display: "grid", gap: "16px", marginTop: "24px" }}>
-          {pages.map((page) => (
-            <article
-              key={page.id}
-              style={{
-                border: "1px solid #333",
-                borderRadius: "12px",
-                padding: "16px",
-              }}
-            >
-              <h2>{page.title}</h2>
-              <p>Slug: {page.slug}</p>
-              <p>Status: {page.status}</p>
-              <p>Versões: {page.versions.length}</p>
-              <p>
-                Criada em:{" "}
-                {new Date(page.createdAt).toLocaleString("pt-BR")}
-              </p>
-              {page.updatedAt && (
-                <p>
-                  Atualizada em:{" "}
-                  {new Date(page.updatedAt).toLocaleString("pt-BR")}
-                </p>
-              )}
-            </article>
-          ))}
+        <div className="mt-10 rounded-2xl border border-neutral-800 bg-neutral-950 p-6">
+          <h2 className="text-lg font-medium">Status</h2>
+          <p className="mt-3 text-sm text-neutral-400">
+            Página recriada corretamente para o App Router do Next.js.
+          </p>
         </div>
-      )}
+      </div>
     </main>
   );
 }
