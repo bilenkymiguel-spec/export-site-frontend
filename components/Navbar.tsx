@@ -64,11 +64,11 @@ export default function Navbar() {
   const categories = getAllCategories();
 
   useEffect(() => {
-    const original = document.body.style.overflow;
-    document.body.style.overflow = isOpen ? "hidden" : original;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = isOpen ? "hidden" : originalOverflow;
 
     return () => {
-      document.body.style.overflow = original;
+      document.body.style.overflow = originalOverflow;
     };
   }, [isOpen]);
 
