@@ -1,5 +1,5 @@
-import Navbar from "../components/Navbar";
 import Link from "next/link";
+import Navbar from "../components/Navbar";
 
 const fashionSlides = [
   {
@@ -89,8 +89,8 @@ function SliderTrack({
           <article className="hero-slider-card" key={`${blockClass}-${index}`}>
             <div
               className="hero-slider-image"
-              aria-label={slide.alt}
               role="img"
+              aria-label={slide.alt}
               style={{
                 backgroundImage: `url(${slide.image})`,
                 backgroundPosition: slide.position || "center 58%",
@@ -130,12 +130,16 @@ export default function HomePage() {
 
                 <p>
                   Bolsas de crochê, bolsas de couro, coturnos femininos,
-                  sapatos sociais, óculos de sol, carteiras e nécessaires em uma
-                  seleção moderna, elegante e sem marcas aparentes.
+                  sapatos sociais, óculos de sol, carteiras de couro e
+                  nécessaires em uma seleção moderna, elegante e sem marcas
+                  aparentes.
                 </p>
               </div>
 
-              <SliderTrack slides={fashionSlides} blockClass="slider-fashion" />
+              <SliderTrack
+                slides={fashionSlides}
+                blockClass="slider-fashion"
+              />
             </section>
 
             <section className="showcase-panel">

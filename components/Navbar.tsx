@@ -1,230 +1,201 @@
-import Navbar from "../components/Navbar";
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const fashionSlides = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=1200&q=80",
-    alt: "Bolsa de couro premium sem marca",
-    position: "center center",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1200&q=80",
-    alt: "Bolsa de couro minimalista",
-    position: "center 58%",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
-    alt: "Acessórios neutros e elegantes",
-    position: "center center",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1516826957135-700dedea698c?auto=format&fit=crop&w=1200&q=80",
-    alt: "Calçado elegante sem marca",
-    position: "center 62%",
-  },
-];
-
-const homeSlides = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=1200&q=80",
-    alt: "Cerâmica decorativa minimalista",
-    position: "center center",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1200&q=80",
-    alt: "Mesa com cerâmica e enxoval",
-    position: "center 55%",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
-    alt: "Ambiente minimalista com decoração",
-    position: "center center",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1484101403633-562f891dc89a?auto=format&fit=crop&w=1200&q=80",
-    alt: "Interior com objetos de design",
-    position: "center center",
-  },
-];
-
-const curationPoints = [
-  {
-    title: "Exclusividade",
-    description:
-      "Seleção orientada por identidade, singularidade e diferenciação real.",
-  },
-  {
-    title: "Acabamento",
-    description:
-      "Foco em matéria-prima, execução e qualidade visual consistente.",
-  },
-  {
-    title: "Leitura internacional",
-    description:
-      "Produtos com estética adequada a públicos interessados em design e sofisticação.",
-  },
-];
-
-function SliderTrack({
-  slides,
-  blockClass,
-}: {
-  slides: { image: string; alt: string; position?: string }[];
-  blockClass: string;
-}) {
-  const duplicatedSlides = [...slides, ...slides];
-
+function MenuIcon() {
   return (
-    <div className={`hero-slider-block ${blockClass}`}>
-      <div className="hero-slider-track">
-        {duplicatedSlides.map((slide, index) => (
-          <article className="hero-slider-card" key={`${blockClass}-${index}`}>
-            <div
-              className="hero-slider-image"
-              aria-label={slide.alt}
-              role="img"
-              style={{
-                backgroundImage: `url(${slide.image})`,
-                backgroundPosition: slide.position || "center center",
-              }}
-            />
-          </article>
-        ))}
-      </div>
-    </div>
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="nav-svg">
+      <path
+        d="M4 7H20M4 12H20M4 17H20"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }
 
-export default function HomePage() {
+function CloseIcon() {
   return (
-    <main className="site-shell">
-      <Navbar />
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="nav-svg">
+      <path
+        d="M6 6L18 18M18 6L6 18"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
 
-      <section className="hero-home hero-home--catalog">
-        <div className="hero-home-overlay" />
+function UserIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="nav-svg">
+      <path
+        d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+      />
+      <path
+        d="M4 21C4.9 17.4 7.9 15.5 12 15.5C16.1 15.5 19.1 17.4 20 21"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
 
-        <div className="hero-home-content hero-home-content--catalog">
-          <p className="hero-kicker">Curadoria brasileira</p>
+function BagIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="nav-svg">
+      <path
+        d="M6.5 8.5H17.5L16.6 20H7.4L6.5 8.5Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9 9V7.5C9 5.567 10.567 4 12.5 4C14.433 4 16 5.567 16 7.5V9"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
 
-          <h1>D’OUTRO LADO</h1>
+export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
 
-          <p className="hero-description">
-            Conectando produtos brasileiros exclusivos a pessoas interessadas ao
-            redor do mundo.
-          </p>
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
-          <div className="hero-showcase-grid">
-            <section className="showcase-panel">
-              <div className="showcase-copy">
-                <p className="showcase-eyebrow">Seleção</p>
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
-                <h2>Moda neutra, couro e acessórios</h2>
+  function closeMenu() {
+    setMenuOpen(false);
+  }
 
-                <p>
-                  Bolsas de crochê, bolsas de couro, coturnos femininos,
-                  sapatos sociais, óculos de sol, carteiras e nécessaires em uma
-                  seleção moderna, elegante e sem marcas aparentes.
-                </p>
-              </div>
+  return (
+    <>
+      <header className="site-header">
+        <div className="site-header-top">Curadoria brasileira</div>
 
-              <SliderTrack slides={fashionSlides} blockClass="slider-fashion" />
-            </section>
+        <div className="site-header-bar">
+          <div className="site-header-left">
+            <button
+              type="button"
+              className="header-circle-button"
+              aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+              aria-expanded={menuOpen}
+              aria-controls="site-drawer-menu"
+              onClick={() => setMenuOpen((prev) => !prev)}
+            >
+              <MenuIcon />
+            </button>
+          </div>
 
-            <section className="showcase-panel">
-              <div className="showcase-copy">
-                <p className="showcase-eyebrow">Seleção</p>
+          <Link href="/" className="brand-logo" onClick={closeMenu}>
+            D’OUTRO LADO
+          </Link>
 
-                <h2>Cerâmica, decoração e casa</h2>
+          <div className="header-actions">
+            <Link
+              href="/login"
+              className="header-action-pill"
+              aria-label="Acessar login"
+              onClick={closeMenu}
+            >
+              <UserIcon />
+              <span>Login</span>
+            </Link>
 
-                <p>
-                  Peças de decoração em cerâmica, pratos, xícaras, travessas e
-                  enxoval apresentados com estética minimalista, refinada e
-                  acolhedora.
-                </p>
-              </div>
-
-              <SliderTrack slides={homeSlides} blockClass="slider-home" />
-            </section>
+            <Link
+              href="/bag"
+              className="header-action-pill"
+              aria-label="Abrir bag"
+              onClick={closeMenu}
+            >
+              <BagIcon />
+              <span>Bag</span>
+            </Link>
           </div>
         </div>
-      </section>
+      </header>
 
-      <section className="home-intro">
-        <div className="container">
-          <div className="home-intro-grid">
-            <div>
-              <p className="section-eyebrow">Posicionamento</p>
+      <div
+        className={`menu-backdrop ${menuOpen ? "active" : ""}`}
+        onClick={closeMenu}
+        aria-hidden={!menuOpen}
+      />
 
-              <h2 className="section-heading">
-                Produtos brasileiros exclusivos com leitura premium
-              </h2>
-            </div>
+      <aside
+        id="site-drawer-menu"
+        className={`side-drawer ${menuOpen ? "open" : ""}`}
+        aria-hidden={!menuOpen}
+      >
+        <div className="side-drawer-header">
+          <span className="side-drawer-brand">D’Outro Lado</span>
 
-            <p className="section-copy">
-              A D’Outro Lado apresenta uma seleção refinada de produtos
-              brasileiros com forte identidade estética, conectando criação
-              nacional a um público global interessado em design, autenticidade
-              e sofisticação.
-            </p>
-          </div>
+          <button
+            type="button"
+            className="side-drawer-close"
+            aria-label="Fechar menu"
+            onClick={closeMenu}
+          >
+            <CloseIcon />
+          </button>
         </div>
-      </section>
 
-      <section className="curation-section">
-        <div className="container">
-          <div className="section-header">
-            <p className="section-eyebrow">Curadoria</p>
+        <nav className="side-drawer-links" aria-label="Navegação principal">
+          <Link href="/" onClick={closeMenu}>
+            Início
+          </Link>
 
-            <h2 className="section-heading">
-              Critérios que orientam cada seleção
-            </h2>
-          </div>
+          <Link href="/sobre" onClick={closeMenu}>
+            Sobre
+          </Link>
 
-          <div className="curation-grid">
-            {curationPoints.map((point) => (
-              <article key={point.title} className="curation-card">
-                <h3>{point.title}</h3>
-                <p>{point.description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+          <Link
+            href="/produtos/moda-estilo-e-acessorios"
+            onClick={closeMenu}
+          >
+            Moda, estilo e acessórios
+          </Link>
 
-      <section className="home-highlight">
-        <div className="container">
-          <div className="highlight-box">
-            <p className="section-eyebrow">Essência</p>
+          <Link
+            href="/produtos/casa-ceramica-e-decoracao"
+            onClick={closeMenu}
+          >
+            Casa, cerâmica e decoração
+          </Link>
 
-            <h2 className="section-heading">
-              Uma vitrine sofisticada da produção brasileira
-            </h2>
+          <Link href="/checkout" onClick={closeMenu}>
+            Fazer pedido
+          </Link>
 
-            <p className="section-copy narrow">
-              Moda, couro, crochê, acessórios, cerâmica, decoração e enxoval
-              apresentados com direção visual consistente e curadoria elegante.
-            </p>
+          <Link href="/contato" onClick={closeMenu}>
+            Contato
+          </Link>
+        </nav>
 
-            <div className="highlight-actions">
-              <Link href="/contato" className="secondary-cta">
-                Entrar em contato
-              </Link>
-
-              <Link href="/checkout" className="primary-cta">
-                Demonstrar interesse
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+        <div className="side-drawer-footer">Curadoria brasileira para o mundo</div>
+      </aside>
+    </>
   );
 }
