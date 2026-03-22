@@ -1,66 +1,74 @@
-"use client";
-
-import { useMemo, useState } from "react";
+import Link from "next/link";
+import type { ProductBlockItem } from "../../types/pageVersion";
 
 type SectionSliderProps = {
   title: string;
-  items: string[];
+  subtitle?: string;
+  products: ProductBlockItem[];
 };
 
-export default function SectionSlider({ title, items }: SectionSliderProps) {
-  const [index, setIndex] = useState(0);
-
-  const visibleItems = useMemo(() => {
-    if (items.length <= 3) return items;
-    return items.slice(index, index + 3);
-  }, [index, items]);
-
-  function handlePrev() {
-    if (items.length <= 3) return;
-    setIndex((prev) => (prev === 0 ? Math.max(items.length - 3, 0) : prev - 1));
-  }
-
-  function handleNext() {
-    if (items.length <= 3) return;
-    setIndex((prev) => (prev >= items.length - 3 ? 0 : prev + 1));
-  }
-
+export default function SectionSlider({
+  title,
+  subtitle,
+  products,
+}: SectionSliderProps) {
   return (
-    <section className="rounded-[28px] border border-white/10 bg-white/[0.04] p-6 md:p-8">
-      <div className="mb-6 flex items-center justify-between gap-4">
-        <h3 className="text-2xl font-semibold text-[#f4efe6]">{title}</h3>
+    <section className="w-full bg-[#f7f3ee] text-[#111111]">
+      <div className="mx-auto max-w-7xl px-6 py-14 md:px-10 md:py-20">
+        <div className="mb-8">
+          {subtitle ? (
+            <p className="mb-2 text-xs uppercase tracking-[0.3em] text-[#8a7a5c]">
+              {subtitle}
+            </p>
+          ) : null}
 
-        <div className="flex gap-2">
-          <button
-            onClick={handlePrev}
-            className="rounded-full border border-white/15 px-4 py-2 text-sm text-[#f4efe6] transition hover:bg-white/10"
-          >
-            Anterior
-          </button>
-          <button
-            onClick={handleNext}
-            className="rounded-full border border-white/15 px-4 py-2 text-sm text-[#f4efe6] transition hover:bg-white/10"
-          >
-            Próximo
-          </button>
+          <h2 className="text-2xl font-light md:text-4xl">{title}</h2>
         </div>
-      </div>
 
-      <div className="grid gap-4 md:grid-cols-3">
-        {visibleItems.map((item) => (
-          <article
-            key={item}
-            className="rounded-[22px] border border-white/10 bg-black/30 p-5 transition hover:border-white/20 hover:bg-white/[0.05]"
-          >
-            <p className="text-sm uppercase tracking-[0.24em] text-white/35">
-              Curadoria
-            </p>
-            <h4 className="mt-3 text-lg font-medium text-[#f4efe6]">{item}</h4>
-            <p className="mt-3 text-sm leading-6 text-white/55">
-              Seleção com padrão internacional, linguagem sofisticada e foco em mercados de alto valor.
-            </p>
-          </article>
-        ))}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {products.map((product) => (
+            <article
+              key={product.id}
+              className="overflow-hidden rounded-2xl border border-[#e7dfd4] bg-white"
+            >
+              <div className="h-72 w-full bg-[#f0ebe4]">
+                {product.image ? (
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <div className="flex h-full items-center justify-center text-sm uppercase tracking-[0.2em] text-[#9b9286]">
+                    Sem imagem
+                  </div>
+                )}
+              </div>
+
+              <div className="p-5">
+                <p className="mb-2 text-xs uppercase tracking-[0.2em] text-[#8a7a5c]">
+                  {product.category ?? "Produto"}
+                </p>
+
+                <h3 className="mb-3 text-lg font-medium">{product.name}</h3>
+
+                <p className="mb-4 text-sm text-[#4d4d4d]">
+                  {new Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  }).format(product.price)}
+                </p>
+
+                <Link
+                  href={product.slug ? `/produtos/${product.slug}` : "/produtos"}
+                  className="inline-flex border border-[#111111] px-4 py-2 text-xs uppercase tracking-[0.2em] transition hover:bg-[#111111] hover:text-white"
+                >
+                  Ver produto
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -1,34 +1,41 @@
-export type PageBlockType = "hero" | "text" | "image" | "grid" | "cta";
-
-export type PageBlock = {
-  id: string;
-  type: PageBlockType;
-  title?: string;
-  subtitle?: string;
-  content?: string;
-  imageUrl?: string;
-  buttonLabel?: string;
-  buttonHref?: string;
-  items?: string[];
-};
-
-export type PageVersion = {
+export type ProductBlockItem = {
   id: number;
-  slug: string;
-  title: string;
-  versionNumber: number;
-  status: "active" | "draft" | "archived";
-  createdAt: string;
-  createdByUserId: number;
-  createdByName: string;
-  changeSummary: string;
-  blocks: PageBlock[];
+  name: string;
+  price: number;
+  image?: string;
+  category?: string;
+  slug?: string;
 };
+
+export type LuxuryBlock = {
+  id: string;
+  type: "luxury";
+  title: string;
+  subtitle?: string;
+  description?: string;
+  image?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+};
+
+export type SliderBlock = {
+  id: string;
+  type: "slider";
+  title: string;
+  subtitle?: string;
+  products: ProductBlockItem[];
+};
+
+export type PageBlock = LuxuryBlock | SliderBlock;
 
 export type ManagedPage = {
+  id: string;
   slug: string;
   title: string;
-  activeVersionId: number;
-  draftVersionId?: number;
-  versions: PageVersion[];
+  isActive: boolean;
+  blocks: PageBlock[];
+  createdAt?: string;
+  updatedAt?: string;
 };
+
+export type PageVersion = ManagedPage;
