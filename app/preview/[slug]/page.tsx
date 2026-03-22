@@ -10,9 +10,7 @@ function formatSlug(slug: string) {
     .replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
-export default async function PreviewPage({
-  params,
-}: PreviewPageProps) {
+export default async function PreviewPage({ params }: PreviewPageProps) {
   const { slug } = await params;
 
   return (
@@ -27,7 +25,7 @@ export default async function PreviewPage({
         </h1>
 
         <p className="mt-4 max-w-2xl text-sm leading-7 text-neutral-300">
-          Esta é uma página de pré-visualização dinâmica para o slug:
+          Página dinâmica de pré-visualização para o slug:
           <span className="ml-2 rounded-full border border-neutral-700 px-3 py-1 text-xs uppercase tracking-[0.18em] text-neutral-200">
             {slug}
           </span>

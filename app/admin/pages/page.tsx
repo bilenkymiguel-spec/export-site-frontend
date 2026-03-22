@@ -11,14 +11,14 @@ export default function AdminPagesPage() {
         </h1>
 
         <p className="mt-4 max-w-2xl text-sm leading-7 text-neutral-300">
-          Esta área pode ser usada para organizar páginas editáveis, rascunhos,
-          versões originais e futuras pré-visualizações internas do projeto.
+          Área destinada à organização de páginas internas, versões editáveis,
+          estrutura original e fluxos de pré-visualização do projeto.
         </p>
 
         <div className="mt-10 rounded-2xl border border-neutral-800 bg-neutral-950 p-6">
           <h2 className="text-lg font-medium">Status</h2>
           <p className="mt-3 text-sm text-neutral-400">
-            Página recriada corretamente para o App Router do Next.js.
+            Página válida carregada com export default.
           </p>
         </div>
       </div>
