@@ -1,22 +1,12 @@
-import "./globals.css";
-import type { Metadata } from "next";
-import Providers from "./providers";
+"use client";
 
-export const metadata: Metadata = {
-  title: "D’Outro Lado",
-  description: "Curadoria brasileira premium para exportação.",
+import type { ReactNode } from "react";
+import { CartProvider } from "../context/CartContext";
+
+type ProvidersProps = {
+  children: ReactNode;
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="pt-BR">
-      <body>
-        <Providers>{children}</Providers>
-      </body>
-    </html>
-  );
+export default function Providers({ children }: ProvidersProps) {
+  return <CartProvider>{children}</CartProvider>;
 }
