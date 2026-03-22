@@ -4,54 +4,54 @@ import Link from "next/link";
 const fashionSlides = [
   {
     image:
-      "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=1400&q=80",
     alt: "Bolsa de couro premium sem marca",
-    position: "center center",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1200&q=80",
-    alt: "Bolsa de couro minimalista",
     position: "center 58%",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
-    alt: "Acessórios neutros e elegantes",
-    position: "center center",
+      "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1400&q=80",
+    alt: "Bolsa de couro minimalista",
+    position: "center 62%",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1516826957135-700dedea698c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1400&q=80",
+    alt: "Acessórios neutros e elegantes",
+    position: "center 54%",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1516826957135-700dedea698c?auto=format&fit=crop&w=1400&q=80",
     alt: "Calçado elegante sem marca",
-    position: "center 62%",
+    position: "center 60%",
   },
 ];
 
 const homeSlides = [
   {
     image:
-      "https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=1400&q=80",
     alt: "Cerâmica decorativa minimalista",
-    position: "center center",
+    position: "center 58%",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1400&q=80",
     alt: "Mesa com cerâmica e enxoval",
     position: "center 55%",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=80",
     alt: "Ambiente minimalista com decoração",
-    position: "center center",
+    position: "center 52%",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1484101403633-562f891dc89a?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1484101403633-562f891dc89a?auto=format&fit=crop&w=1400&q=80",
     alt: "Interior com objetos de design",
-    position: "center center",
+    position: "center 56%",
   },
 ];
 
@@ -93,7 +93,7 @@ function SliderTrack({
               role="img"
               style={{
                 backgroundImage: `url(${slide.image})`,
-                backgroundPosition: slide.position || "center center",
+                backgroundPosition: slide.position || "center 58%",
               }}
             />
           </article>
