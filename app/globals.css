@@ -79,7 +79,7 @@ button {
 .gold-btn,
 .ghost-btn {
   border-radius: 999px;
-  transition: 0.25s ease;
+  transition: all 0.35s ease;
 }
 
 .icon-btn {
@@ -95,6 +95,7 @@ button {
 
 .icon-btn:hover {
   border-color: var(--gold);
+  transform: translateY(-2px);
 }
 
 .brand-block {
@@ -193,6 +194,7 @@ button {
 .gold-btn:hover {
   background: var(--gold);
   color: #111;
+  transform: translateY(-2px);
 }
 
 .ghost-btn,
@@ -204,6 +206,7 @@ button {
 .outline-btn:hover {
   border-color: var(--gold);
   background: rgba(255, 255, 255, 0.04);
+  transform: translateY(-2px);
 }
 
 .hero-visual {
@@ -251,11 +254,12 @@ button {
   border-radius: 28px;
   overflow: hidden;
   background: var(--panel-soft);
-  transition: 0.28s ease;
+  transition: all 0.35s ease;
 }
 
 .product-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
   border-color: rgba(201, 171, 109, 0.5);
 }
 
@@ -271,6 +275,11 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.product-card:hover .product-media img {
+  transform: scale(1.05);
 }
 
 .product-media-placeholder {
@@ -457,6 +466,26 @@ button {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+/* animações premium */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.9s ease forwards;
+}
+
+.fade-up-delay {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1.2s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 980px) {

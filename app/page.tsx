@@ -30,10 +30,11 @@ export default async function HomePage() {
 
   return (
     <main className="page-shell">
-      {/* HEADER */}
       <header className="site-header">
         <div className="container site-header-inner">
-          <button className="icon-btn">☰</button>
+          <button className="icon-btn" aria-label="Menu">
+            ≡
+          </button>
 
           <div className="brand-block">
             <p className="brand-eyebrow">Curadoria brasileira</p>
@@ -41,16 +42,19 @@ export default async function HomePage() {
           </div>
 
           <div className="header-actions">
-            <Link href="/auth" className="icon-btn">👤</Link>
-            <Link href="/cart" className="icon-btn">🛒</Link>
+            <Link href="/auth" className="icon-btn" aria-label="Login">
+              Login
+            </Link>
+            <Link href="/cart" className="icon-btn" aria-label="Carrinho">
+              Bag
+            </Link>
           </div>
         </div>
       </header>
 
-      {/* HERO */}
       <section className="hero">
         <div className="container hero-grid">
-          <div>
+          <div className="fade-up">
             <p className="eyebrow">Boutique internacional</p>
 
             <h2 className="hero-title">
@@ -58,7 +62,8 @@ export default async function HomePage() {
             </h2>
 
             <p className="hero-text">
-              Curadoria refinada com foco em exportação para mercados de alto padrão.
+              Curadoria refinada com foco em exportação para mercados de alto
+              padrão.
             </p>
 
             <div className="hero-actions">
@@ -72,16 +77,15 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <div className="hero-visual">
+          <div className="hero-visual fade-up-delay">
             <img
-              src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b"
+              src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1400&q=80"
               alt="Editorial"
             />
           </div>
         </div>
       </section>
 
-      {/* PRODUTOS */}
       <section className="section">
         <div className="container">
           <div className="section-head">

@@ -132,7 +132,13 @@ export default function CartPage() {
                   Pedido
                 </h3>
 
-                <div style={{ marginTop: 28, paddingTop: 22, borderTop: "1px solid var(--line)" }}>
+                <div
+                  style={{
+                    marginTop: 28,
+                    paddingTop: 22,
+                    borderTop: "1px solid var(--line)",
+                  }}
+                >
                   <div className="summary-line">
                     <span>Itens</span>
                     <span>
@@ -151,7 +157,11 @@ export default function CartPage() {
                     Ir para checkout
                   </Link>
 
-                  <button type="button" onClick={clearCart} className="ghost-btn">
+                  <button
+                    type="button"
+                    onClick={clearCart}
+                    className="ghost-btn"
+                  >
                     Limpar carrinho
                   </button>
                 </div>
