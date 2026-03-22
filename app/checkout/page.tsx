@@ -1,59 +1,72 @@
-"use client";
-
-import { useState } from "react";
 import Navbar from "../../components/Navbar";
 
 export default function CheckoutPage() {
-  const [name, setName] = useState("");
-  const [country, setCountry] = useState("");
-  const [details, setDetails] = useState("");
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-
-    alert("Pedido enviado com sucesso");
-  }
-
   return (
     <main className="site-shell">
       <Navbar />
 
-      <section className="checkout-section">
-        <div className="checkout-container">
-          <div className="checkout-header">
-            <p className="checkout-label">Solicitação</p>
-            <h1>Solicitar cotação</h1>
+      <section className="internal-hero">
+        <div className="container">
+          <p className="section-eyebrow">Pedido</p>
+          <h1 className="internal-title">Demonstrar interesse</h1>
+          <p className="internal-description">
+            Envie sua solicitação inicial para que possamos entender o perfil do pedido
+            e orientar os próximos passos.
+          </p>
+        </div>
+      </section>
+
+      <section className="internal-section">
+        <div className="container">
+          <div className="checkout-panel">
+            <div className="checkout-copy">
+              <p className="section-eyebrow">Solicitação</p>
+              <h2 className="section-heading">Pedido inicial e contato comercial</h2>
+              <p className="section-copy">
+                Esta etapa funciona como uma manifestação de interesse. Após o envio,
+                o contato pode seguir por atendimento direto para alinhamento de seleção,
+                quantidades, disponibilidade e envio.
+              </p>
+            </div>
+
+            <form className="premium-form">
+              <div className="form-grid">
+                <div className="form-field">
+                  <label htmlFor="nome">Nome</label>
+                  <input id="nome" name="nome" type="text" placeholder="Seu nome" />
+                </div>
+
+                <div className="form-field">
+                  <label htmlFor="email">E-mail</label>
+                  <input id="email" name="email" type="email" placeholder="Seu e-mail" />
+                </div>
+
+                <div className="form-field">
+                  <label htmlFor="empresa">Empresa ou boutique</label>
+                  <input id="empresa" name="empresa" type="text" placeholder="Nome da empresa" />
+                </div>
+
+                <div className="form-field">
+                  <label htmlFor="pais">País</label>
+                  <input id="pais" name="pais" type="text" placeholder="País de interesse" />
+                </div>
+              </div>
+
+              <div className="form-field">
+                <label htmlFor="mensagem">Interesse</label>
+                <textarea
+                  id="mensagem"
+                  name="mensagem"
+                  placeholder="Descreva os produtos ou categorias de interesse"
+                  rows={6}
+                />
+              </div>
+
+              <button type="submit" className="primary-cta">
+                Enviar solicitação
+              </button>
+            </form>
           </div>
-
-          <form onSubmit={handleSubmit} className="checkout-form">
-            <input
-              type="text"
-              placeholder="Nome ou empresa"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-
-            <input
-              type="text"
-              placeholder="País"
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
-              required
-            />
-
-            <textarea
-              placeholder="Detalhes do pedido"
-              value={details}
-              onChange={(e) => setDetails(e.target.value)}
-              rows={5}
-              required
-            />
-
-            <button type="submit" className="primary-cta">
-              Enviar pedido
-            </button>
-          </form>
         </div>
       </section>
     </main>

@@ -1,23 +1,22 @@
+import Navbar from "../../../components/Navbar";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Navbar from "../../../components/Navbar";
 import { getAllCategories, getCategoryBySlug } from "../../../data/categoryData";
 
 type PageProps = {
-  params: Promise<{
+  params: {
     slug: string;
-  }>;
+  };
 };
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return getAllCategories().map((category) => ({
     slug: category.slug,
   }));
 }
 
-export default async function ProductCategoryPage({ params }: PageProps) {
-  const { slug } = await params;
-  const category = getCategoryBySlug(slug);
+export default function CategoriaPage({ params }: PageProps) {
+  const category = getCategoryBySlug(params.slug);
 
   if (!category) {
     notFound();
@@ -28,59 +27,45 @@ export default async function ProductCategoryPage({ params }: PageProps) {
       <Navbar />
 
       <section className="category-hero">
-        <div className="category-hero-copy">
+        <div
+          className="category-hero-image"
+          style={{ backgroundImage: `url(${category.heroImage})` }}
+        />
+        <div className="category-hero-overlay" />
+
+        <div className="container category-hero-content">
           <p className="section-eyebrow">{category.eyebrow}</p>
-          <h1 className="category-title">{category.title}</h1>
-          <p className="category-description">{category.description}</p>
-
-          <Link href="/checkout" className="primary-cta">
-            FAZER PEDIDO
-          </Link>
-        </div>
-
-        <div className="category-hero-image">
-          <img src={category.heroImage} alt={category.title} />
+          <h1 className="internal-title">{category.shortTitle}</h1>
+          <p className="internal-description">{category.description}</p>
         </div>
       </section>
 
-      <section className="products-section">
-        <div className="products-grid">
-          {category.products.map((product) => (
-            <article key={product.id} className="product-card">
-              <div className="product-card-image">
-                <img src={product.image} alt={product.name} />
-              </div>
+      <section className="internal-section">
+        <div className="container">
+          <div className="section-header">
+            <p className="section-eyebrow">Curadoria</p>
+            <h2 className="section-heading">Linhas selecionadas</h2>
+          </div>
 
-              <div className="product-card-body">
-                <div className="product-card-top">
-                  <h2>{product.name}</h2>
-                  <span className="product-price">
-                    {product.currency} {product.price.toLocaleString("pt-BR")}
-                  </span>
-                </div>
+          <div className="product-grid">
+            {category.items.map((item) => (
+              <article key={item.name} className="product-card">
+                <div className="product-card-top" />
+                <h3>{item.name}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
 
-                <p className="product-short-description">
-                  {product.shortDescription}
-                </p>
+          <div className="internal-actions">
+            <Link href="/checkout" className="primary-cta">
+              Demonstrar interesse
+            </Link>
 
-                <div className="product-meta">
-                  {product.material && <span>Material: {product.material}</span>}
-                  {product.origin && <span>Origem: {product.origin}</span>}
-                  {typeof product.exportScore === "number" && (
-                    <span>Export score: {product.exportScore}</span>
-                  )}
-                </div>
-
-                <p className="product-description">{product.description}</p>
-
-                <div className="product-card-actions">
-                  <Link href="/checkout" className="primary-cta small">
-                    Solicitar cotação
-                  </Link>
-                </div>
-              </div>
-            </article>
-          ))}
+            <Link href="/contato" className="secondary-cta">
+              Entrar em contato
+            </Link>
+          </div>
         </div>
       </section>
     </main>
