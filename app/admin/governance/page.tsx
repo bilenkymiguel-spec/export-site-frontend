@@ -1,97 +1,87 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { GovernanceDecision } from "../../../src/types/governance";
-import type { AdminUser } from "../../../src/types/admin";
-import { canAccessGovernance } from "../../../src/utils/permissions";
+import type { GovernanceDecision } from "@/types/governance";
+import type { AdminUser } from "@/types/admin";
+import { canAccessGovernance } from "@/utils/permissions";
 
-const currentUser: AdminUser = {
+const mockUser: AdminUser = {
   id: 1,
-  name: "Miguel Machado Bilenky",
-  email: "miguel@doutrolado.com",
-  role: "master",
-  status: "active",
+  email: "admin@doutrolado.com",
+  name: "Administrador",
+  role: "super_admin",
   createdAt: new Date().toISOString(),
-  canVote: true,
-  leave: { isAway: false },
-  isOriginalMaster: true,
 };
 
-const eligibleDirectors = [
-  { id: 1, name: "Miguel Machado Bilenky" },
-  { id: 2, name: "Jessica Teixeira" },
-  { id: 4, name: "Diretor Operacional" },
-];
-
-const initialDecisions: GovernanceDecision[] = [
+const mockDecisions: GovernanceDecision[] = [
   {
-    id: 1001,
-    type: "publish_page",
-    title: "Publicação da nova home premium",
-    description: "Liberar versão staging da homepage internacional.",
-    createdByUserId: 2,
-    createdByName: "Jessica Teixeira",
-    createdAt: new Date().toISOString(),
+    id: 1,
+    title: "Aprovar nova curadoria de acessórios",
+    description: "Inclusão de novos produtos premium em couro na vitrine internacional.",
     status: "pending",
-    eligibleVoters: eligibleDirectors.length,
-    quorumRequired: Math.floor(eligibleDirectors.length / 2) + 1,
-    votes: [],
-    relatedEntityId: "home",
+    createdAt: new Date().toISOString(),
+    createdBy: {
+      id: 1,
+      name: "Administrador",
+      email: "admin@doutrolado.com",
+    },
+  },
+  {
+    id: 2,
+    title: "Revisão da política comercial internacional",
+    description: "Atualização de critérios de aprovação para exportação.",
+    status: "approved",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    createdBy: {
+      id: 1,
+      name: "Administrador",
+      email: "admin@doutrolado.com",
+    },
   },
 ];
 
+const statusOptions = [
+  { value: "all", label: "Todos" },
+  { value: "pending", label: "Pendente" },
+  { value: "approved", label: "Aprovado" },
+  { value: "rejected", label: "Rejeitado" },
+];
+
+function formatDate(value: string) {
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) return value;
+
+  return new Intl.DateTimeFormat("pt-BR", {
+    dateStyle: "short",
+    timeStyle: "short",
+  }).format(date);
+}
+
 export default function GovernancePage() {
-  const [decisions, setDecisions] = useState(initialDecisions);
+  const [user] = useState<AdminUser | null>(mockUser);
+  const [filter, setFilter] = useState("all");
 
-  const hasAccess = canAccessGovernance(currentUser);
+  const allowed = canAccessGovernance(user);
 
-  const pendingCount = useMemo(
-    () => decisions.filter((d) => d.status === "pending").length,
-    [decisions]
-  );
+  const decisions = useMemo(() => {
+    if (filter === "all") return mockDecisions;
+    return mockDecisions.filter((item) => item.status === filter);
+  }, [filter]);
 
-  function handleVote(decisionId: number, value: "approve" | "reject") {
-    setDecisions((prev) =>
-      prev.map((decision) => {
-        if (decision.id !== decisionId) return decision;
-
-        const filteredVotes = decision.votes.filter(
-          (vote) => vote.userId !== currentUser.id
-        );
-
-        const updatedVotes = [
-          ...filteredVotes,
-          {
-            userId: currentUser.id,
-            userName: currentUser.name,
-            value,
-            createdAt: new Date().toISOString(),
-          },
-        ];
-
-        const approveCount = updatedVotes.filter((v) => v.value === "approve").length;
-        const rejectCount = updatedVotes.filter((v) => v.value === "reject").length;
-
-        let status: GovernanceDecision["status"] = "pending";
-        if (approveCount >= decision.quorumRequired) status = "approved";
-        if (rejectCount >= decision.quorumRequired) status = "rejected";
-
-        return {
-          ...decision,
-          votes: updatedVotes,
-          status,
-        };
-      })
-    );
-  }
-
-  if (!hasAccess) {
+  if (!allowed) {
     return (
-      <main className="min-h-screen bg-black px-6 py-10 text-[#f4efe6]">
-        <div className="mx-auto max-w-4xl rounded-3xl border border-white/10 bg-white/5 p-8">
-          <h1 className="text-2xl font-semibold">Governança</h1>
-          <p className="mt-3 text-white/60">
-            Você não possui acesso a esta área.
+      <main className="min-h-screen bg-black px-6 py-16 text-white">
+        <div className="mx-auto max-w-4xl rounded-2xl border border-neutral-800 bg-neutral-950 p-8">
+          <p className="text-xs uppercase tracking-[0.35em] text-neutral-400">
+            Governança
+          </p>
+          <h1 className="mt-3 text-3xl font-light tracking-[0.08em]">
+            Acesso negado
+          </h1>
+          <p className="mt-4 text-sm text-neutral-300">
+            Você não tem permissão para acessar esta área.
           </p>
         </div>
       </main>
@@ -99,98 +89,71 @@ export default function GovernancePage() {
   }
 
   return (
-    <main className="min-h-screen bg-black px-6 py-10 text-[#f4efe6]">
+    <main className="min-h-screen bg-black px-6 py-16 text-white">
       <div className="mx-auto max-w-6xl">
-        <header className="mb-8 border-b border-white/10 pb-6">
-          <p className="text-sm uppercase tracking-[0.35em] text-white/50">
-            Governança
-          </p>
-          <h1 className="mt-2 text-3xl font-semibold">Decisões críticas</h1>
-          <p className="mt-2 text-white/60">
-            Aprovação por maioria dinâmica entre master e superadmins ativos.
-          </p>
-        </header>
-
-        <section className="mb-8 grid gap-6 md:grid-cols-3">
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-            <p className="text-sm text-white/50">Eleitores elegíveis</p>
-            <h2 className="mt-2 text-2xl font-semibold">{eligibleDirectors.length}</h2>
+        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-xs uppercase tracking-[0.35em] text-neutral-400">
+              Governança
+            </p>
+            <h1 className="mt-3 text-3xl font-light tracking-[0.08em]">
+              Decisões Administrativas
+            </h1>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-neutral-300">
+              Controle interno de decisões estratégicas, revisões e aprovações.
+            </p>
           </div>
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-            <p className="text-sm text-white/50">Quórum padrão</p>
-            <h2 className="mt-2 text-2xl font-semibold">
-              {Math.floor(eligibleDirectors.length / 2) + 1}
-            </h2>
-          </div>
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-            <p className="text-sm text-white/50">Pendências</p>
-            <h2 className="mt-2 text-2xl font-semibold">{pendingCount}</h2>
-          </div>
-        </section>
 
-        <section className="space-y-6">
-          {decisions.map((decision) => {
-            const myVote = decision.votes.find((vote) => vote.userId === currentUser.id);
+          <div className="w-full max-w-xs">
+            <label htmlFor="status" className="mb-2 block text-sm text-neutral-300">
+              Filtrar por status
+            </label>
+            <select
+              id="status"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+              className="w-full rounded-xl border border-neutral-700 bg-neutral-950 px-4 py-3 text-sm text-white outline-none"
+            >
+              {statusOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
 
-            return (
-              <article
-                key={decision.id}
-                className="rounded-3xl border border-white/10 bg-white/5 p-6"
-              >
-                <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.24em] text-white/40">
-                      {decision.type}
+        <div className="grid gap-4">
+          {decisions.map((decision) => (
+            <article
+              key={decision.id}
+              className="rounded-2xl border border-neutral-800 bg-neutral-950 p-6"
+            >
+              <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                <div>
+                  <h2 className="text-lg font-medium">{decision.title}</h2>
+                  {decision.description ? (
+                    <p className="mt-3 text-sm leading-6 text-neutral-400">
+                      {decision.description}
                     </p>
-                    <h2 className="mt-2 text-2xl font-semibold">{decision.title}</h2>
-                    <p className="mt-2 text-white/60">{decision.description}</p>
-                  </div>
-
-                  <div className="rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-sm">
-                    <p>Status: <strong>{decision.status}</strong></p>
-                    <p>Quórum: {decision.quorumRequired}</p>
-                  </div>
+                  ) : null}
                 </div>
 
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <button
-                    onClick={() => handleVote(decision.id, "approve")}
-                    className="rounded-full bg-[#f4efe6] px-5 py-3 font-medium text-black"
-                  >
-                    Aprovar
-                  </button>
-                  <button
-                    onClick={() => handleVote(decision.id, "reject")}
-                    className="rounded-full border border-white/20 px-5 py-3 font-medium"
-                  >
-                    Rejeitar
-                  </button>
-                </div>
+                <span className="rounded-full border border-neutral-700 px-3 py-1 text-xs uppercase tracking-[0.18em] text-neutral-300">
+                  {decision.status}
+                </span>
+              </div>
 
-                <div className="mt-6">
-                  <p className="text-sm text-white/50">
-                    Seu voto atual: {myVote ? myVote.value : "não registrado"}
-                  </p>
-
-                  <div className="mt-4 space-y-2">
-                    {decision.votes.map((vote) => (
-                      <div
-                        key={`${decision.id}-${vote.userId}`}
-                        className="rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-sm"
-                      >
-                        {vote.userName}: {vote.value}
-                      </div>
-                    ))}
-
-                    {decision.votes.length === 0 && (
-                      <p className="text-sm text-white/40">Ainda sem votos.</p>
-                    )}
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-        </section>
+              <div className="mt-5 grid gap-2 text-sm text-neutral-500 md:grid-cols-3">
+                <p>Criado por: {decision.createdBy.name}</p>
+                <p>Criado em: {formatDate(decision.createdAt)}</p>
+                <p>
+                  Atualizado em: {decision.updatedAt ? formatDate(decision.updatedAt) : "-"}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </main>
   );
