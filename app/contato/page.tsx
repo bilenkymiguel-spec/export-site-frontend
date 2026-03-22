@@ -5,46 +5,38 @@ export default function ContatoPage() {
     <main className="site-shell">
       <Navbar />
 
-      <section className="internal-hero">
+      <section className="inner-hero">
         <div className="container">
           <p className="section-eyebrow">Contato</p>
-          <h1 className="internal-title">Fale com a D’Outro Lado</h1>
-          <p className="internal-description">
-            Entre em contato para apresentar interesse, oportunidades comerciais
-            ou dúvidas sobre a curadoria.
+          <h1 className="inner-page-title">Entre em contato</h1>
+          <p className="inner-page-description">
+            Estamos disponíveis para apresentar a curadoria, esclarecer dúvidas e
+            orientar os próximos passos.
           </p>
         </div>
       </section>
 
-      <section className="internal-section">
+      <section className="content-section">
         <div className="container">
-          <div className="content-grid">
-            <div>
+          <div className="contact-grid">
+            <article className="info-card">
               <p className="section-eyebrow">Atendimento</p>
-              <h2 className="section-heading">Canal direto para conversas comerciais</h2>
-            </div>
+              <h2 className="section-heading">Canal principal</h2>
+              <p className="section-copy">
+                Telefone / WhatsApp
+                <br />
+                16 99197-7845
+              </p>
+            </article>
 
-            <div className="content-stack">
-              <div className="contact-card">
-                <span className="contact-label">WhatsApp</span>
-                <a href="https://wa.me/5516991977845" target="_blank" rel="noreferrer">
-                  +55 16 99197-7845
-                </a>
-              </div>
-
-              <div className="contact-card">
-                <span className="contact-label">E-mail</span>
-                <a href="mailto:bilenlymiguel@gmail.com">bilenkymiguel@gmail.com</a>
-              </div>
-
-              <div className="contact-card">
-                <span className="contact-label">Perfil</span>
-                <p>
-                  Disponível para compradores, boutiques e parceiros interessados
-                  em produtos brasileiros exclusivos.
-                </p>
-              </div>
-            </div>
+            <article className="info-card">
+              <p className="section-eyebrow">Mensagem</p>
+              <h2 className="section-heading">Apresentação do interesse</h2>
+              <p className="section-copy">
+                Informe a categoria desejada, tipo de produto e o seu interesse
+                comercial para avançarmos de forma objetiva.
+              </p>
+            </article>
           </div>
         </div>
       </section>

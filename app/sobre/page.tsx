@@ -1,59 +1,69 @@
+import Link from "next/link";
+import Navbar from "../../components/Navbar";
+
 export default function SobrePage() {
   return (
-    <main className="page-shell">
-      <section className="content-shell">
-        <span className="section-kicker">About</span>
-        <h1 className="page-title">We select objects that carry identity, not trends.</h1>
+    <main className="site-shell">
+      <Navbar />
 
-        <div className="page-prose">
-          <p>
-            D&apos;OUTRO LADO is an independent curation platform created to connect
-            refined Brazilian products with international clients who value
-            design, authenticity and material quality.
+      <section className="inner-hero">
+        <div className="container">
+          <p className="section-eyebrow">Sobre</p>
+          <h1 className="inner-page-title">D’OUTRO LADO</h1>
+          <p className="inner-page-description">
+            Uma vitrine digital dedicada a apresentar produtos brasileiros
+            exclusivos a pessoas interessadas ao redor do mundo, com curadoria,
+            sofisticação e leitura internacional.
           </p>
+        </div>
+      </section>
 
-          <p>
-            We work with a clear editorial standard: visual restraint, premium
-            execution, discreet presence and export potential.
-          </p>
-
-          <p>
-            Our focus is not mass retail. It is access. Access to Brazilian
-            objects that deserve international visibility without losing their
-            cultural clarity or formal elegance.
-          </p>
-
-          <div className="about-grid">
-            <div className="about-card">
-              <h2>Vision</h2>
-              <p>
-                Present Brazilian design with international discipline and premium
-                visual language.
+      <section className="content-section">
+        <div className="container">
+          <div className="content-grid">
+            <article className="info-card">
+              <p className="section-eyebrow">Essência</p>
+              <h2 className="section-heading">Curadoria brasileira refinada</h2>
+              <p className="section-copy">
+                A proposta da D’Outro Lado é conectar a produção brasileira com
+                um público que valoriza design, autenticidade, acabamento e
+                identidade estética.
               </p>
-            </div>
+            </article>
 
-            <div className="about-card">
-              <h2>Curation</h2>
-              <p>
-                Select products with strong material identity, clean aesthetics
-                and no unnecessary visual noise.
+            <article className="info-card">
+              <p className="section-eyebrow">Direção</p>
+              <h2 className="section-heading">Seleção com leitura premium</h2>
+              <p className="section-copy">
+                Cada categoria é organizada para transmitir sofisticação,
+                clareza visual e consistência, evitando excesso de informação e
+                mantendo o foco no produto.
               </p>
-            </div>
+            </article>
+          </div>
+        </div>
+      </section>
 
-            <div className="about-card">
-              <h2>Brazil → World</h2>
-              <p>
-                Build a direct bridge between local production and buyers abroad
-                without generic marketplace mediation.
-              </p>
-            </div>
+      <section className="content-section">
+        <div className="container">
+          <div className="highlight-box">
+            <p className="section-eyebrow">Posicionamento</p>
+            <h2 className="section-heading">
+              Produtos com identidade, presença e potencial internacional
+            </h2>
+            <p className="section-copy narrow">
+              Moda neutra, couro, crochê, acessórios, cerâmica, decoração e
+              enxoval apresentados com uma direção estética elegante e
+              consistente.
+            </p>
 
-            <div className="about-card">
-              <h2>Criteria</h2>
-              <p>
-                Material quality, discreet sophistication, export compatibility
-                and coherent presentation.
-              </p>
+            <div className="highlight-actions">
+              <Link href="/contato" className="secondary-cta">
+                Entrar em contato
+              </Link>
+              <Link href="/checkout" className="primary-cta">
+                Demonstrar interesse
+              </Link>
             </div>
           </div>
         </div>
