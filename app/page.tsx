@@ -1,221 +1,212 @@
-"use client";
-
-import Link from "next/link";
-import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
 import Navbar from "../components/Navbar";
-import { categories, products } from "../src/data/catalogData";
-import {
-  convertFromBRL,
-  detectCountryLabel,
-  detectCurrency,
-  formatCurrency,
-  type CurrencyCode,
-} from "../src/utils/intl";
+import Link from "next/link";
 
-type CategoryCardProps = {
-  href: string;
-  image: string;
-  alt: string;
-  eyebrow: string;
-  title: string;
-  description: string;
-  delay?: number;
-};
+const fashionSlides = [
+  {
+    image:
+      "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=1200&q=80",
+    alt: "Bolsa de couro premium sem marca",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1200&q=80",
+    alt: "Bolsa de couro minimalista",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
+    alt: "Acessórios neutros e elegantes",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1516826957135-700dedea698c?auto=format&fit=crop&w=1200&q=80",
+    alt: "Calçado elegante sem marca",
+  },
+];
 
-function CategoryCard({
-  href,
-  image,
-  alt,
-  eyebrow,
-  title,
-  description,
-  delay = 0,
-}: CategoryCardProps) {
+const homeSlides = [
+  {
+    image:
+      "https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=1200&q=80",
+    alt: "Cerâmica decorativa minimalista",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1200&q=80",
+    alt: "Mesa com cerâmica e enxoval",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+    alt: "Ambiente minimalista com decoração",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1484101403633-562f891dc89a?auto=format&fit=crop&w=1200&q=80",
+    alt: "Interior com objetos de design",
+  },
+];
+
+const curationPoints = [
+  {
+    title: "Exclusividade",
+    description:
+      "Seleção orientada por identidade, singularidade e diferenciação real.",
+  },
+  {
+    title: "Acabamento",
+    description:
+      "Foco em matéria-prima, execução e qualidade visual consistente.",
+  },
+  {
+    title: "Leitura internacional",
+    description:
+      "Produtos com estética adequada a públicos interessados em design e sofisticação.",
+  },
+];
+
+function SliderTrack({
+  slides,
+  blockClass,
+}: {
+  slides: { image: string; alt: string }[];
+  blockClass: string;
+}) {
+  const duplicatedSlides = [...slides, ...slides];
+
   return (
-    <Link
-      href={href}
-      className="home-category-card reveal-card"
-      style={{ animationDelay: `${delay}ms` }}
-    >
-      <div className="home-category-media">
-        <Image
-          src={image}
-          alt={alt}
-          fill
-          sizes="(max-width: 1100px) 100vw, 50vw"
-          className="home-category-image"
-        />
-        <div className="home-category-overlay" />
+    <div className={`hero-slider-block ${blockClass}`}>
+      <div className="hero-slider-track">
+        {duplicatedSlides.map((slide, index) => (
+          <article className="hero-slider-card" key={`${blockClass}-${index}`}>
+            <div
+              className="hero-slider-image"
+              style={{ backgroundImage: `url(${slide.image})` }}
+            />
+          </article>
+        ))}
       </div>
-
-      <div className="home-category-content">
-        <span className="home-category-eyebrow">{eyebrow}</span>
-        <h2>{title}</h2>
-        <p>{description}</p>
-
-        <span className="home-category-cta">
-          <span className="home-category-cta-text">EXPLORAR</span>
-          <span className="home-category-cta-line" />
-          <span className="home-category-cta-arrow">↗</span>
-        </span>
-      </div>
-
-      <span className="home-category-cursor">
-        <span>VER</span>
-      </span>
-    </Link>
+    </div>
   );
 }
 
 export default function HomePage() {
-  const [loaded, setLoaded] = useState(false);
-  const [countryCode, setCountryCode] = useState("BR");
-  const [currency, setCurrency] = useState<CurrencyCode>("BRL");
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoaded(true), 60);
-
-    const locale = navigator.language || "pt-BR";
-    const inferredCountry = locale.split("-")[1]?.toUpperCase() || "BR";
-    const inferredCurrency = detectCurrency(inferredCountry);
-
-    setCountryCode(inferredCountry);
-    setCurrency(inferredCurrency);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const featuredProducts = useMemo(() => products.slice(0, 4), []);
-
   return (
-    <main className={`home-page ${loaded ? "page-is-ready" : ""}`}>
+    <main className="site-shell">
       <Navbar />
 
-      <section className="home-hero-premium">
-        <div className="home-hero-premium-inner">
-          <span className="home-hero-kicker">CURADORIA BRASILEIRA PARA O MUNDO</span>
+      <section className="hero-home hero-home--catalog">
+        <div className="hero-home-overlay" />
 
-          <h1 className="home-brand-title">D&apos;OUTRO LADO</h1>
+        <div className="hero-home-content hero-home-content--catalog">
+          <p className="hero-kicker">Curadoria brasileira</p>
 
-          <p className="home-hero-description">
-            Produtos brasileiros selecionados com linguagem visual refinada,
-            materialidade forte e apresentação internacional.
+          <h1>D’OUTRO LADO</h1>
+
+          <p className="hero-description">
+            Conectando produtos brasileiros exclusivos a pessoas interessadas ao
+            redor do mundo.
           </p>
 
-          <div className="home-proof-strip">
-            <span>Brasil → Europa</span>
-            <span>Curadoria independente</span>
-            <span>Sem marcas aparentes</span>
-          </div>
+          <div className="hero-showcase-grid">
+            <section className="showcase-panel">
+              <div className="showcase-copy">
+                <p className="showcase-eyebrow">Seleção</p>
 
-          <div className="home-locale-bar">
-            <span>Shipping to: {detectCountryLabel(countryCode)}</span>
-            <span>Currency: {currency}</span>
+                <h2>Moda neutra, couro e acessórios</h2>
+
+                <p>
+                  Bolsas de crochê, bolsas de couro, coturnos femininos,
+                  sapatos sociais, óculos de sol, carteiras e nécessaires em uma
+                  seleção moderna, elegante e sem marcas aparentes.
+                </p>
+              </div>
+
+              <SliderTrack slides={fashionSlides} blockClass="slider-fashion" />
+            </section>
+
+            <section className="showcase-panel">
+              <div className="showcase-copy">
+                <p className="showcase-eyebrow">Seleção</p>
+
+                <h2>Cerâmica, decoração e casa</h2>
+
+                <p>
+                  Peças de decoração em cerâmica, pratos, xícaras, travessas e
+                  enxoval apresentados com estética minimalista, refinada e
+                  acolhedora.
+                </p>
+              </div>
+
+              <SliderTrack slides={homeSlides} blockClass="slider-home" />
+            </section>
           </div>
         </div>
       </section>
 
-      <section className="home-editorial-intro">
-        <div className="section-shell">
-          <div className="home-editorial-copy reveal-card" style={{ animationDelay: "100ms" }}>
-            <span className="section-kicker">Posicionamento</span>
-            <h2>Uma boutique internacional com curadoria brasileira refinada.</h2>
-            <p>
-              A D&apos;OUTRO LADO reúne moda neutra, couro, acessórios e objetos
-              para casa com presença discreta, estética sofisticada e potencial
-              real para mercados internacionais.
+      <section className="home-intro">
+        <div className="container">
+          <div className="home-intro-grid">
+            <div>
+              <p className="section-eyebrow">Posicionamento</p>
+
+              <h2 className="section-heading">
+                Produtos brasileiros exclusivos com leitura premium
+              </h2>
+            </div>
+
+            <p className="section-copy">
+              A D’Outro Lado apresenta uma seleção refinada de produtos
+              brasileiros com forte identidade estética, conectando criação
+              nacional a um público global interessado em design, autenticidade
+              e sofisticação.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="home-category-section">
-        <div className="home-category-grid">
-          {categories.map((category, index) => (
-            <CategoryCard
-              key={category.slug}
-              href={`/produtos/${category.slug}`}
-              image={category.heroImage}
-              alt={category.title}
-              eyebrow={category.eyebrow.toUpperCase()}
-              title={category.title.toUpperCase()}
-              description={category.shortDescription}
-              delay={140 + index * 120}
-            />
-          ))}
-        </div>
-      </section>
+      <section className="curation-section">
+        <div className="container">
+          <div className="section-header">
+            <p className="section-eyebrow">Curadoria</p>
 
-      <section className="home-featured-products">
-        <div className="section-shell">
-          <div className="section-heading">
-            <span className="section-kicker">Seleção em destaque</span>
-            <h2>Objetos e acessórios com identidade, não tendência.</h2>
-            <p>
-              Uma edição comercial mais precisa para compradores que buscam
-              design brasileiro com apresentação premium e leitura internacional.
-            </p>
+            <h2 className="section-heading">
+              Critérios que orientam cada seleção
+            </h2>
           </div>
 
-          <div className="product-grid">
-            {featuredProducts.map((product) => {
-              const convertedPrice = convertFromBRL(product.priceBRL, currency);
-
-              return (
-                <Link
-                  key={product.id}
-                  href={`/produto/${product.slug}`}
-                  className="product-card"
-                >
-                  <div className="product-card-image-wrap">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 25vw"
-                      className="product-card-image"
-                    />
-                  </div>
-
-                  <div className="product-card-body">
-                    <div className="product-card-topline">
-                      <span>{product.material}</span>
-                      <span>{product.origin}</span>
-                    </div>
-
-                    <h3>{product.name}</h3>
-                    <p>{product.description}</p>
-
-                    <div className="product-card-bottom">
-                      <strong>{formatCurrency(convertedPrice, currency)}</strong>
-                      <span>Add to selection</span>
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
+          <div className="curation-grid">
+            {curationPoints.map((point) => (
+              <article key={point.title} className="curation-card">
+                <h3>{point.title}</h3>
+                <p>{point.description}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="home-final-statement">
-        <div className="section-shell">
-          <div className="home-final-card">
-            <span className="section-kicker">International access</span>
-            <h2>Access Brazilian design without intermediaries.</h2>
-            <p>
-              Curadoria, apresentação e direção visual pensadas para aproximar
-              produção local de clientes internacionais com mais clareza, valor
-              percebido e sofisticação.
+      <section className="home-highlight">
+        <div className="container">
+          <div className="highlight-box">
+            <p className="section-eyebrow">Essência</p>
+
+            <h2 className="section-heading">
+              Uma vitrine sofisticada da produção brasileira
+            </h2>
+
+            <p className="section-copy narrow">
+              Moda, couro, crochê, acessórios, cerâmica, decoração e enxoval
+              apresentados com direção visual consistente e curadoria elegante.
             </p>
 
-            <div className="home-final-actions">
-              <Link href="/sobre" className="secondary-action">
-                Sobre a curadoria
+            <div className="highlight-actions">
+              <Link href="/contato" className="secondary-cta">
+                Entrar em contato
               </Link>
-              <Link href="/checkout" className="primary-action">
-                Iniciar pedido
+
+              <Link href="/checkout" className="primary-cta">
+                Demonstrar interesse
               </Link>
             </div>
           </div>
