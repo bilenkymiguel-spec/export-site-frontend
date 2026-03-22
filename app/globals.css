@@ -7,6 +7,9 @@
   --muted: #d8d0c3;
   --gold: #c9ab6d;
   --gold-dark: #8b6a3b;
+
+  --font-display: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
 }
 
 * {
@@ -23,15 +26,10 @@ body {
   padding: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-  background: red !important;
-}
-
-body {
-  background: red !important;
+  font-family: var(--font-body);
 }
 
 a {
@@ -114,9 +112,10 @@ button {
 
 .brand-title {
   margin: 0;
-  font-size: 34px;
-  font-weight: 300;
-  letter-spacing: 0.24em;
+  font-family: var(--font-display);
+  font-size: 38px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
 }
 
 .header-actions {
@@ -139,7 +138,7 @@ button {
   grid-template-columns: 1.05fr 0.95fr;
   align-items: center;
   gap: 48px;
-  padding: 72px 0;
+  padding: 100px 0;
 }
 
 .eyebrow {
@@ -152,10 +151,11 @@ button {
 
 .hero-title {
   margin: 0;
-  font-size: clamp(44px, 8vw, 84px);
-  line-height: 0.95;
-  font-weight: 300;
   max-width: 760px;
+  font-family: var(--font-display);
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 1.02;
+  font-weight: 400;
 }
 
 .hero-text {
@@ -221,7 +221,7 @@ button {
 }
 
 .section {
-  padding: 88px 0;
+  padding: 120px 0;
 }
 
 .section-head {
@@ -234,8 +234,9 @@ button {
 
 .section-title {
   margin: 0;
+  font-family: var(--font-display);
   font-size: clamp(32px, 5vw, 56px);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.05;
 }
 
@@ -304,9 +305,10 @@ button {
 
 .product-name {
   margin: 0;
-  font-size: 28px;
+  font-family: var(--font-display);
+  font-size: 30px;
   line-height: 1.15;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .product-row {
@@ -379,8 +381,9 @@ button {
 
 .cart-item-name {
   margin: 0;
+  font-family: var(--font-display);
   font-size: 30px;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .cart-item-price {
@@ -486,17 +489,13 @@ button {
     font-size: 24px;
   }
 
-  .hero {
-    padding-top: 0;
-  }
-
   .hero-grid {
-    padding: 48px 0 56px;
+    padding: 56px 0 64px;
     gap: 28px;
   }
 
   .section {
-    padding: 56px 0;
+    padding: 72px 0;
   }
 
   .hero-text {
