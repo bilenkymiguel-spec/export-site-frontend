@@ -3,10 +3,6 @@
 import type { ReactNode } from "react";
 import { CartProvider } from "../context/CartContext";
 
-type ProvidersProps = {
-  children: ReactNode;
-};
-
-export default function Providers({ children }: ProvidersProps) {
+export default function Providers({ children }: { children: ReactNode }) {
   return <CartProvider>{children}</CartProvider>;
 }
