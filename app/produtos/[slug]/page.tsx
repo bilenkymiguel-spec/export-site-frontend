@@ -1,30 +1,83 @@
-"use client";
+import Link from "next/link";
 
-import { notFound } from "next/navigation";
-import { getCategoryBySlug } from "../../../data/categoryData";
-
-type PageProps = {
-  params: {
-    slug: string;
-  };
+type Product = {
+  id: number;
+  name: string;
+  price: number;
+  image?: string;
+  category?: string;
 };
 
-export default function CategoryPage({ params }: PageProps) {
-  const category = getCategoryBySlug(params.slug);
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ||
+  "https://backend-export-production.up.railway.app";
 
-  if (!category) {
-    notFound();
+async function getProducts(): Promise<Product[]> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/products`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) return [];
+    return res.json();
+  } catch {
+    return [];
   }
+}
+
+export default async function ProdutosPage() {
+  const products = await getProducts();
 
   return (
-    <main style={{ padding: "40px" }}>
-      <h1>{category.title}</h1>
-      <p>{category.description}</p>
+    <main className="page-shell">
+      <section className="section">
+        <div className="container">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow">Catálogo</p>
+              <h1 className="section-title">Produtos disponíveis</h1>
+            </div>
 
-      <div style={{ marginTop: "24px" }}>
-        <p>Slug: {category.slug}</p>
-        <p>Imagem: {category.image}</p>
-      </div>
+            <Link href="/" className="outline-btn">
+              Voltar
+            </Link>
+          </div>
+
+          <div className="products-grid">
+            {products.map((product) => (
+              <Link
+                key={product.id}
+                href={`/produtos/${product.id}`}
+                className="product-card"
+              >
+                <div className="product-media">
+                  {product.image ? (
+                    <img src={product.image} alt={product.name} />
+                  ) : (
+                    <div className="product-media-placeholder">
+                      <p className="mini-brand">D’OUTRO LADO</p>
+                      <p className="mini-copy">Imagem do produto</p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="product-body">
+                  <p className="product-category">
+                    {product.category || "Produto"}
+                  </p>
+
+                  <h2 className="product-name">{product.name}</h2>
+
+                  <div className="product-row">
+                    <span className="product-price">€ {product.price}</span>
+                    <span className="outline-btn">Ver</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
