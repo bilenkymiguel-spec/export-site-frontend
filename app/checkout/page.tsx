@@ -3,102 +3,76 @@
 import Navbar from "../../components/Navbar";
 import Link from "next/link";
 
-const bagItems = [
-  {
-    id: 1,
-    name: "Bolsa de couro estruturada",
-    category: "Moda neutra, couro e acessórios",
-    quantity: 1,
-    note: "Interesse para pedido internacional",
-  },
-  {
-    id: 2,
-    name: "Conjunto de cerâmica decorativa",
-    category: "Cerâmica, decoração e casa",
-    quantity: 1,
-    note: "Seleção para ambiente residencial",
-  },
-];
-
-export default function CheckoutPage() {
-  const hasItems = bagItems.length > 0;
-
+export default function LoginPage() {
   return (
     <main className="site-shell">
       <Navbar />
 
       <section className="page-section">
-        <div className="page-container">
-          <div className="page-header">
-            <p className="section-eyebrow">Bag</p>
-            <h1 className="page-title luxury">Sua seleção</h1>
-            <p className="page-text">
-              Revise os itens de interesse antes de avançar para o contato ou
-              solicitação de pedido.
+        <div className="page-container page-container-narrow">
+          <header className="page-header page-header-center">
+            <p className="section-eyebrow">Acesso</p>
+            <h1 className="page-title luxury-title">Login</h1>
+            <p className="page-text page-text-center">
+              Acesse sua conta para acompanhar pedidos, interesses e informações
+              da sua seleção.
             </p>
-          </div>
+          </header>
 
-          {hasItems ? (
-            <div className="bag-layout">
-              <div className="bag-list">
-                {bagItems.map((item) => (
-                  <article key={item.id} className="bag-card">
-                    <div className="bag-card-copy">
-                      <p className="bag-category">{item.category}</p>
-                      <h2>{item.name}</h2>
-                      <p className="bag-note">{item.note}</p>
-                    </div>
-
-                    <div className="bag-meta">
-                      <span className="bag-qty">Qtd. {item.quantity}</span>
-                    </div>
-                  </article>
-                ))}
+          <div className="panel-card auth-panel">
+            <form className="auth-form">
+              <div className="form-field">
+                <label htmlFor="email" className="form-label">
+                  E-mail
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  className="form-input"
+                  placeholder="seuemail@exemplo.com"
+                />
               </div>
 
-              <aside className="bag-summary">
-                <p className="section-eyebrow">Resumo</p>
+              <div className="form-field">
+                <label htmlFor="password" className="form-label">
+                  Senha
+                </label>
+                <input
+                  id="password"
+                  type="password"
+                  className="form-input"
+                  placeholder="Digite sua senha"
+                />
+              </div>
 
-                <div className="summary-row">
-                  <span>Itens selecionados</span>
-                  <strong>{bagItems.length}</strong>
-                </div>
+              <div className="auth-meta-row">
+                <label className="checkbox-line">
+                  <input type="checkbox" />
+                  <span>Manter conectado</span>
+                </label>
 
-                <div className="summary-row">
-                  <span>Status</span>
-                  <strong>Pronto para contato</strong>
-                </div>
+                <Link href="/contato" className="text-link">
+                  Esqueceu a senha?
+                </Link>
+              </div>
 
-                <p className="summary-text">
-                  Esta seleção funciona como base para iniciar atendimento,
-                  validar disponibilidade e estruturar o pedido.
-                </p>
+              <button type="submit" className="primary-cta full-width">
+                Entrar
+              </button>
+            </form>
 
-                <div className="summary-actions">
-                  <Link href="/contato" className="primary-cta full">
-                    Prosseguir
-                  </Link>
+            <div className="divider-line" />
 
-                  <Link href="/" className="secondary-cta full">
-                    Continuar explorando
-                  </Link>
-                </div>
-              </aside>
-            </div>
-          ) : (
-            <div className="empty-state">
-              <p className="section-eyebrow">Bag</p>
-              <h2 className="page-title luxury small-title">Nenhum item selecionado</h2>
-              <p className="page-text centered">
-                Sua bag está vazia no momento. Explore as categorias para montar
-                sua seleção.
+            <div className="auth-footer">
+              <p className="page-text page-text-center auth-footer-text">
+                Ainda não possui acesso?
               </p>
 
-              <Link href="/" className="primary-cta">
-                Explorar categorias
+              <Link href="/contato" className="secondary-cta full-width">
+                Solicitar atendimento
               </Link>
             </div>
-          )}
+          </div>
         </div>
       </section>
     </main>

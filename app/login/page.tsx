@@ -9,43 +9,43 @@ export default function LoginPage() {
       <Navbar />
 
       <section className="page-section">
-        <div className="page-container narrow">
-          <div className="page-header center">
+        <div className="page-container page-container-narrow">
+          <header className="page-header page-header-center">
             <p className="section-eyebrow">Acesso</p>
-            <h1 className="page-title luxury">Login</h1>
-            <p className="page-text centered">
+            <h1 className="page-title luxury-title">Login</h1>
+            <p className="page-text page-text-center">
               Acesse sua conta para acompanhar pedidos, interesses e informações
               da sua seleção.
             </p>
-          </div>
+          </header>
 
-          <div className="auth-card">
+          <div className="panel-card auth-panel">
             <form className="auth-form">
-              <div className="form-group">
+              <div className="form-field">
                 <label htmlFor="email" className="form-label">
                   E-mail
                 </label>
                 <input
                   id="email"
                   type="email"
-                  placeholder="seuemail@exemplo.com"
                   className="form-input"
+                  placeholder="seuemail@exemplo.com"
                 />
               </div>
 
-              <div className="form-group">
+              <div className="form-field">
                 <label htmlFor="password" className="form-label">
                   Senha
                 </label>
                 <input
                   id="password"
                   type="password"
-                  placeholder="Digite sua senha"
                   className="form-input"
+                  placeholder="Digite sua senha"
                 />
               </div>
 
-              <div className="auth-row">
+              <div className="auth-meta-row">
                 <label className="checkbox-line">
                   <input type="checkbox" />
                   <span>Manter conectado</span>
@@ -56,19 +56,19 @@ export default function LoginPage() {
                 </Link>
               </div>
 
-              <button type="submit" className="primary-cta full">
+              <button type="submit" className="primary-cta full-width">
                 Entrar
               </button>
             </form>
 
-            <div className="auth-divider" />
+            <div className="divider-line" />
 
             <div className="auth-footer">
-              <p className="page-text centered small">
+              <p className="page-text page-text-center auth-footer-text">
                 Ainda não possui acesso?
               </p>
 
-              <Link href="/contato" className="secondary-cta full">
+              <Link href="/contato" className="secondary-cta full-width">
                 Solicitar atendimento
               </Link>
             </div>
