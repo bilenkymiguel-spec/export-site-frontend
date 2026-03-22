@@ -1,81 +1,86 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import Navbar from "../../../components/Navbar";
+import { getAllCategories, getCategoryBySlug } from "../../../data/categoryData";
 
-type Product = {
-  id: number;
-  name: string;
-  price: number;
-  image?: string;
-  category?: string;
+type PageProps = {
+  params: Promise<{
+    slug: string;
+  }>;
 };
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ||
-  "https://backend-export-production.up.railway.app";
-
-async function getProducts(): Promise<Product[]> {
-  try {
-    const res = await fetch(`${API_BASE_URL}/products`, {
-      cache: "no-store",
-    });
-
-    if (!res.ok) return [];
-    return res.json();
-  } catch {
-    return [];
-  }
+export async function generateStaticParams() {
+  return getAllCategories().map((category) => ({
+    slug: category.slug,
+  }));
 }
 
-export default async function ProdutosPage() {
-  const products = await getProducts();
+export default async function ProductCategoryPage({ params }: PageProps) {
+  const { slug } = await params;
+  const category = getCategoryBySlug(slug);
+
+  if (!category) {
+    notFound();
+  }
 
   return (
-    <main className="page-shell">
-      <section className="section">
-        <div className="container">
-          <div className="section-head">
-            <div>
-              <p className="eyebrow">Catálogo</p>
-              <h1 className="section-title">Produtos disponíveis</h1>
-            </div>
+    <main className="site-shell">
+      <Navbar />
 
-            <Link href="/" className="outline-btn">
-              Voltar
-            </Link>
-          </div>
+      <section className="category-hero">
+        <div className="category-hero-copy">
+          <p className="section-eyebrow">{category.eyebrow}</p>
+          <h1 className="category-title">{category.title}</h1>
+          <p className="category-description">{category.description}</p>
 
-          <div className="products-grid">
-            {products.map((product) => (
-              <Link
-                key={product.id}
-                href={`/produtos/${product.id}`}
-                className="product-card"
-              >
-                <div className="product-media">
-                  {product.image ? (
-                    <img src={product.image} alt={product.name} />
-                  ) : (
-                    <div className="product-media-placeholder">
-                      <p className="mini-brand">D’OUTRO LADO</p>
-                      <p className="mini-copy">Imagem do produto</p>
-                    </div>
+          <Link href="/checkout" className="primary-cta">
+            FAZER PEDIDO
+          </Link>
+        </div>
+
+        <div className="category-hero-image">
+          <img src={category.heroImage} alt={category.title} />
+        </div>
+      </section>
+
+      <section className="products-section">
+        <div className="products-grid">
+          {category.products.map((product) => (
+            <article key={product.id} className="product-card">
+              <div className="product-card-image">
+                <img src={product.image} alt={product.name} />
+              </div>
+
+              <div className="product-card-body">
+                <div className="product-card-top">
+                  <h2>{product.name}</h2>
+                  <span className="product-price">
+                    {product.currency} {product.price.toLocaleString("pt-BR")}
+                  </span>
+                </div>
+
+                <p className="product-short-description">
+                  {product.shortDescription}
+                </p>
+
+                <div className="product-meta">
+                  {product.material && <span>Material: {product.material}</span>}
+                  {product.origin && <span>Origem: {product.origin}</span>}
+                  {typeof product.exportScore === "number" && (
+                    <span>Export score: {product.exportScore}</span>
                   )}
                 </div>
 
-                <div className="product-body">
-                  <p className="product-category">
-                    {product.category || "Produto"}
-                  </p>
+                <p className="product-description">{product.description}</p>
 
-                  <h2 className="product-name">{product.name}</h2>
-
-                  <div className="product-row">
-                    <span className="product-price">€ {product.price}</span>
-                    <span className="outline-btn">Ver</span>
-                  </div>
+                <div className="product-card-actions">
+                  <Link href="/checkout" className="primary-cta small">
+                    Solicitar cotação
+                  </Link>
                 </div>
-              </Link>
-            ))}
-          </div>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
     </main>

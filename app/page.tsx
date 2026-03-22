@@ -1,136 +1,78 @@
 import Link from "next/link";
+import Navbar from "../components/Navbar";
+import { getAllCategories } from "../data/categoryData";
 
-type Product = {
-  id: number;
-  name: string;
-  price: number;
-  image?: string;
-  category?: string;
-};
-
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ||
-  "https://backend-export-production.up.railway.app";
-
-async function getProducts(): Promise<Product[]> {
-  try {
-    const res = await fetch(`${API_BASE_URL}/products`, {
-      cache: "no-store",
-    });
-
-    if (!res.ok) return [];
-    return res.json();
-  } catch {
-    return [];
-  }
-}
-
-export default async function HomePage() {
-  const products = await getProducts();
+export default function HomePage() {
+  const categories = getAllCategories();
 
   return (
-    <main className="page-shell">
-      <header className="site-header">
-        <div className="container site-header-inner">
-          <button className="icon-btn" aria-label="Menu">
-            ≡
-          </button>
+    <main className="site-shell">
+      <Navbar />
 
-          <div className="brand-block">
-            <p className="brand-eyebrow">Curadoria brasileira</p>
-            <h1 className="brand-title">D’OUTRO LADO</h1>
-          </div>
+      <section className="hero-section">
+        <div className="hero-copy">
+          <p className="section-eyebrow">EXPORTAÇÃO CURADA</p>
 
-          <div className="header-actions">
-            <Link href="/auth" className="icon-btn" aria-label="Login">
-              Login
+          <h1 className="hero-title">
+            Produtos brasileiros
+            <br />
+            com presença
+            <br />
+            premium.
+          </h1>
+
+          <p className="hero-text">
+            Curadoria refinada com foco em exportação para mercados de alto
+            padrão.
+          </p>
+
+          <div className="hero-actions">
+            <Link href={`/produtos/${categories[0].slug}`} className="primary-cta">
+              EXPLORAR COLEÇÃO
             </Link>
-            <Link href="/cart" className="icon-btn" aria-label="Carrinho">
-              Bag
+
+            <Link href="/checkout" className="secondary-cta">
+              FAZER PEDIDO
             </Link>
           </div>
         </div>
-      </header>
 
-      <section className="hero">
-        <div className="container hero-grid">
-          <div className="fade-up">
-            <p className="eyebrow">Boutique internacional</p>
-
-            <h2 className="hero-title">
-              Produtos brasileiros com presença premium.
-            </h2>
-
-            <p className="hero-text">
-              Curadoria refinada com foco em exportação para mercados de alto
-              padrão.
-            </p>
-
-            <div className="hero-actions">
-              <Link href="/produtos" className="gold-btn">
-                Explorar coleção
-              </Link>
-
-              <Link href="/checkout" className="ghost-btn">
-                Fazer pedido
-              </Link>
-            </div>
-          </div>
-
-          <div className="hero-visual fade-up-delay">
-            <img
-              src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1400&q=80"
-              alt="Editorial"
-            />
-          </div>
+        <div className="hero-visual">
+          <img
+            src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1200&auto=format&fit=crop"
+            alt="Editorial de moda com estética premium"
+          />
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
-          <div className="section-head">
-            <div>
-              <p className="eyebrow">Seleção</p>
-              <h3 className="section-title">Curadoria atual</h3>
-            </div>
+      <section className="catalog-section">
+        <div className="section-heading">
+          <p className="section-eyebrow">CATÁLOGOS</p>
+          <h2 className="section-title">Curadoria em duas frentes</h2>
+        </div>
 
-            <Link href="/produtos" className="outline-btn">
-              Ver catálogo
-            </Link>
-          </div>
+        <div className="catalog-grid">
+          {categories.map((category) => (
+            <article key={category.slug} className="catalog-card">
+              <div className="catalog-card-image">
+                <img src={category.heroImage} alt={category.title} />
+              </div>
 
-          <div className="products-grid">
-            {products.map((product) => (
-              <article key={product.id} className="product-card">
-                <div className="product-media">
-                  {product.image ? (
-                    <img src={product.image} alt={product.name} />
-                  ) : (
-                    <div className="product-media-placeholder">
-                      <p className="mini-brand">D’OUTRO LADO</p>
-                      <p className="mini-copy">Imagem do produto</p>
-                    </div>
-                  )}
+              <div className="catalog-card-content">
+                <p className="catalog-card-eyebrow">{category.eyebrow}</p>
+                <h3>{category.title}</h3>
+                <p>{category.description}</p>
+
+                <div className="catalog-card-footer">
+                  <span>{category.products.length} produtos</span>
+
+                  <Link href={`/produtos/${category.slug}`} className="catalog-link">
+                    Ver catálogo
+                  </Link>
                 </div>
-
-                <div className="product-body">
-                  <p className="product-category">
-                    {product.category || "Produto"}
-                  </p>
-
-                  <h4 className="product-name">{product.name}</h4>
-
-                  <div className="product-row">
-                    <span className="product-price">€ {product.price}</span>
-
-                    <Link href="/produtos" className="outline-btn">
-                      Ver item
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
     </main>
