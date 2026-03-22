@@ -1,222 +1,167 @@
-import Navbar from "../components/Navbar";
+"use client";
+
 import Link from "next/link";
-
-const fashionSlides = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=1200&q=80",
-    alt: "Bolsa de couro premium sem marca",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1200&q=80",
-    alt: "Bolsa de couro minimalista",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
-    alt: "Acessórios neutros e elegantes",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1516826957135-700dedea698c?auto=format&fit=crop&w=1200&q=80",
-    alt: "Calçado elegante sem marca",
-  },
-];
-
-const homeSlides = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=1200&q=80",
-    alt: "Cerâmica decorativa minimalista",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1200&q=80",
-    alt: "Mesa com cerâmica e enxoval",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
-    alt: "Ambiente minimalista com decoração",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1484101403633-562f891dc89a?auto=format&fit=crop&w=1200&q=80",
-    alt: "Interior com objetos de design",
-  },
-];
-
-const curationPoints = [
-  {
-    title: "Exclusividade",
-    description:
-      "Seleção orientada por identidade, singularidade e diferenciação real.",
-  },
-  {
-    title: "Acabamento",
-    description:
-      "Foco em matéria-prima, execução e qualidade visual consistente.",
-  },
-  {
-    title: "Leitura internacional",
-    description:
-      "Produtos com estética adequada a públicos interessados em design e sofisticação.",
-  },
-];
-
-function SliderTrack({
-  slides,
-  blockClass,
-}: {
-  slides: { image: string; alt: string }[];
-  blockClass: string;
-}) {
-  const duplicatedSlides = [...slides, ...slides];
-
-  return (
-    <div className={`hero-slider-block ${blockClass}`}>
-      <div className="hero-slider-track">
-        {duplicatedSlides.map((slide, index) => (
-          <article className="hero-slider-card" key={`${blockClass}-${index}`}>
-            <div
-              className="hero-slider-image"
-              style={{ backgroundImage: `url(${slide.image})` }}
-            />
-          </article>
-        ))}
-      </div>
-    </div>
-  );
-}
+import { Menu, Search, User, ShoppingBag } from "lucide-react";
 
 export default function HomePage() {
   return (
-    <main className="site-shell">
-      <Navbar />
+    <main className="min-h-screen bg-black text-[#f5f1e8]">
+      {/* TOP STRIP */}
+      <div className="border-b border-white/10 bg-black">
+        <div className="mx-auto flex h-10 max-w-[1600px] items-center justify-center px-4">
+          <span className="text-[11px] uppercase tracking-[0.35em] text-[#d6c3a1]">
+            Curadoria Brasileira
+          </span>
+        </div>
+      </div>
 
-      <section className="hero-home hero-home--catalog">
-        <div className="hero-home-overlay" />
+      {/* HEADER */}
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-black/95 backdrop-blur">
+        <div className="relative mx-auto flex h-28 max-w-[1600px] items-center justify-between px-5 md:px-8">
+          {/* LEFT */}
+          <div className="flex w-[120px] items-center justify-start">
+            <button
+              type="button"
+              aria-label="Abrir menu"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 text-[#f5f1e8] transition hover:border-white/30 hover:bg-white/5"
+            >
+              <Menu size={18} strokeWidth={1.5} />
+            </button>
+          </div>
 
-        <div className="hero-home-content hero-home-content--catalog">
-          <p className="hero-kicker">Curadoria brasileira</p>
+          {/* CENTERED BRAND */}
+          <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center">
+            <Link
+              href="/"
+              className="whitespace-nowrap text-center text-[28px] font-light uppercase tracking-[0.42em] text-[#f5f1e8] md:text-[34px]"
+              style={{
+                fontFamily:
+                  '"Cormorant Garamond", "Times New Roman", serif',
+              }}
+            >
+              D&apos;OUTRO LADO
+            </Link>
+          </div>
 
-          <h1>D’OUTRO LADO</h1>
+          {/* RIGHT */}
+          <div className="flex w-[120px] items-center justify-end gap-3">
+            <Link
+              href="/login"
+              className="flex items-center gap-2 rounded-full border border-white/15 px-4 py-3 text-[13px] uppercase tracking-[0.18em] text-[#f5f1e8] transition hover:border-white/30 hover:bg-white/5"
+            >
+              <User size={16} strokeWidth={1.5} />
+              <span className="hidden sm:inline">Login</span>
+            </Link>
 
-          <p className="hero-description">
-            Conectando produtos brasileiros exclusivos a pessoas interessadas ao
-            redor do mundo.
-          </p>
+            <Link
+              href="/bag"
+              className="flex items-center gap-2 rounded-full border border-white/15 px-4 py-3 text-[13px] uppercase tracking-[0.18em] text-[#f5f1e8] transition hover:border-white/30 hover:bg-white/5"
+            >
+              <ShoppingBag size={16} strokeWidth={1.5} />
+              <span className="hidden sm:inline">Bag</span>
+            </Link>
+          </div>
+        </div>
+      </header>
 
-          <div className="hero-showcase-grid">
-            {/* MODA */}
-            <section className="showcase-panel">
-              <div className="showcase-copy">
-                <p className="showcase-eyebrow">Seleção</p>
+      {/* HERO */}
+      <section className="relative overflow-hidden border-b border-white/10 bg-black">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(160,132,85,0.18),transparent_38%)]" />
+        <div className="mx-auto max-w-[1600px] px-5 py-24 md:px-8 md:py-32">
+          <div className="mx-auto max-w-[1100px] text-center">
+            <p className="mb-6 text-[12px] uppercase tracking-[0.35em] text-[#d6c3a1]">
+              Curadoria Brasileira
+            </p>
 
-                <h2>Moda neutra, couro e acessórios</h2>
+            <h1
+              className="mx-auto mb-8 text-center text-[56px] font-light uppercase leading-none tracking-[0.12em] text-[#f5f1e8] md:text-[88px]"
+              style={{
+                fontFamily:
+                  '"Cormorant Garamond", "Times New Roman", serif',
+              }}
+            >
+              D&apos;OUTRO LADO
+            </h1>
 
-                <p>
-                  Bolsas de crochê, bolsas de couro, coturnos femininos,
-                  sapatos sociais, óculos de sol, carteiras e nécessaires em uma
-                  seleção moderna, elegante e sem marcas aparentes.
-                </p>
-              </div>
-
-              <SliderTrack slides={fashionSlides} blockClass="slider-fashion" />
-            </section>
-
-            {/* CASA */}
-            <section className="showcase-panel">
-              <div className="showcase-copy">
-                <p className="showcase-eyebrow">Seleção</p>
-
-                <h2>Cerâmica, decoração e casa</h2>
-
-                <p>
-                  Peças de decoração em cerâmica, pratos, xícaras, travessas e
-                  enxoval apresentados com estética minimalista, refinada e
-                  acolhedora.
-                </p>
-              </div>
-
-              <SliderTrack slides={homeSlides} blockClass="slider-home" />
-            </section>
+            <p className="mx-auto max-w-[900px] text-base leading-relaxed text-[#e8e0d2] md:text-[18px]">
+              Conectando produtos brasileiros exclusivos a pessoas
+              interessadas ao redor do mundo.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* POSICIONAMENTO */}
-      <section className="home-intro">
-        <div className="container">
-          <div className="home-intro-grid">
-            <div>
-              <p className="section-eyebrow">Posicionamento</p>
+      {/* CATEGORIES */}
+      <section className="mx-auto max-w-[1600px] px-5 py-10 md:px-8 md:py-14">
+        <div className="grid grid-cols-1 gap-7 lg:grid-cols-2">
+          {/* MODA */}
+          <Link
+            href="/catalogo/moda"
+            className="group relative min-h-[430px] overflow-hidden border border-white/10 bg-[#0d0d0d]"
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-[1.03]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0.30)), url('https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1400&q=80')",
+              }}
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(0,0,0,0.40),transparent_55%)]" />
 
-              <h2 className="section-heading">
-                Produtos brasileiros exclusivos com leitura premium
+            <div className="relative z-10 flex h-full flex-col justify-end p-8 md:p-10">
+              <p className="mb-4 text-[12px] uppercase tracking-[0.35em] text-[#f0dcc0]">
+                Seleção
+              </p>
+              <h2 className="mb-4 max-w-[700px] text-3xl font-light uppercase leading-tight tracking-[0.03em] text-[#f5f1e8] md:text-4xl">
+                Moda Neutra, Couro e Acessórios
               </h2>
+              <p className="max-w-[720px] text-[17px] leading-relaxed text-[#e5dccd]">
+                Bolsas de crochê, bolsas de couro, coturnos femininos,
+                sapatos sociais, óculos de sol, carteiras e nécessaires
+                em uma seleção moderna, elegante e sem marcas aparentes.
+              </p>
             </div>
+          </Link>
 
-            <p className="section-copy">
-              A D’Outro Lado apresenta uma seleção refinada de produtos
-              brasileiros com forte identidade estética, conectando criação
-              nacional a um público global interessado em design, autenticidade
-              e sofisticação.
-            </p>
-          </div>
-        </div>
-      </section>
+          {/* CASA */}
+          <Link
+            href="/catalogo/casa"
+            className="group relative min-h-[430px] overflow-hidden border border-white/10 bg-[#0d0d0d]"
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-[1.03]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(to top, rgba(0,0,0,0.68), rgba(0,0,0,0.24)), url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=80')",
+              }}
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(0,0,0,0.35),transparent_55%)]" />
 
-      {/* CURADORIA */}
-      <section className="curation-section">
-        <div className="container">
-          <div className="section-header">
-            <p className="section-eyebrow">Curadoria</p>
-
-            <h2 className="section-heading">
-              Critérios que orientam cada seleção
-            </h2>
-          </div>
-
-          <div className="curation-grid">
-            {curationPoints.map((point) => (
-              <article key={point.title} className="curation-card">
-                <h3>{point.title}</h3>
-                <p>{point.description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ESSÊNCIA */}
-      <section className="home-highlight">
-        <div className="container">
-          <div className="highlight-box">
-            <p className="section-eyebrow">Essência</p>
-
-            <h2 className="section-heading">
-              Uma vitrine sofisticada da produção brasileira
-            </h2>
-
-            <p className="section-copy narrow">
-              Moda, couro, crochê, acessórios, cerâmica, decoração e enxoval
-              apresentados com direção visual consistente e curadoria elegante.
-            </p>
-
-            <div className="highlight-actions">
-              <Link href="/contato" className="secondary-cta">
-                Entrar em contato
-              </Link>
-
-              <Link href="/checkout" className="primary-cta">
-                Demonstrar interesse
-              </Link>
+            <div className="relative z-10 flex h-full flex-col justify-end p-8 md:p-10">
+              <p className="mb-4 text-[12px] uppercase tracking-[0.35em] text-[#f0dcc0]">
+                Seleção
+              </p>
+              <h2 className="mb-4 max-w-[700px] text-3xl font-light uppercase leading-tight tracking-[0.03em] text-[#f5f1e8] md:text-4xl">
+                Cerâmica, Decoração e Casa
+              </h2>
+              <p className="max-w-[720px] text-[17px] leading-relaxed text-[#e5dccd]">
+                Peças de decoração em cerâmica, pratos, xícaras, travessas
+                e enxoval apresentados com estética minimalista, refinada e
+                acolhedora.
+              </p>
             </div>
-          </div>
+          </Link>
         </div>
       </section>
+
+      {/* SEARCH BUTTON FLOATING */}
+      <button
+        type="button"
+        aria-label="Buscar"
+        className="fixed bottom-6 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-black/90 text-[#f5f1e8] backdrop-blur transition hover:border-white/30 hover:bg-white/5"
+      >
+        <Search size={18} strokeWidth={1.5} />
+      </button>
     </main>
   );
 }
