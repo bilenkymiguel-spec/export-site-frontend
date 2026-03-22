@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -108,10 +108,10 @@ img {
   justify-content: center;
   white-space: nowrap;
   text-align: center;
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Bodoni Moda", "Cormorant Garamond", serif;
   font-size: clamp(1.85rem, 2.4vw, 2.55rem);
   font-weight: 500;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #f3eee6;
   line-height: 1;
@@ -299,12 +299,22 @@ img {
   min-height: auto;
 }
 
+.hero-home-editorial-image {
+  position: absolute;
+  inset: 0;
+  background-image: url("https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1800&q=80");
+  background-size: cover;
+  background-position: center 28%;
+  opacity: 0.12;
+  transform: scale(1.03);
+}
+
 .hero-home-overlay {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at center 14%, rgba(180, 125, 54, 0.14), transparent 24%),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.82));
+    radial-gradient(circle at center 14%, rgba(180, 125, 54, 0.16), transparent 24%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.9));
   pointer-events: none;
 }
 
@@ -317,36 +327,37 @@ img {
 .hero-home-content--catalog {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 68px 22px 40px;
+  padding: 96px 22px 56px;
 }
 
 .hero-kicker {
-  margin: 0 0 18px;
+  margin: 0 0 20px;
   text-align: center;
   color: var(--accent);
-  font-size: 12px;
-  letter-spacing: 0.34em;
+  font-size: 11px;
+  letter-spacing: 0.42em;
   text-transform: uppercase;
+  opacity: 0.92;
 }
 
 .hero-home h1 {
   margin: 0;
   text-align: center;
   color: var(--foreground);
-  font-family: "Inter", sans-serif;
-  font-size: clamp(3rem, 7.2vw, 6rem);
-  font-weight: 300;
-  letter-spacing: 0.08em;
+  font-family: "Bodoni Moda", "Cormorant Garamond", serif;
+  font-size: clamp(3.3rem, 7.4vw, 6.6rem);
+  font-weight: 500;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  line-height: 0.98;
+  line-height: 0.94;
 }
 
 .hero-description {
-  max-width: 920px;
-  margin: 24px auto 0;
+  max-width: 760px;
+  margin: 28px auto 0;
   text-align: center;
   color: rgba(255, 255, 255, 0.92);
-  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-size: clamp(1rem, 1.45vw, 1.18rem);
   line-height: 1.7;
 }
 
@@ -356,24 +367,38 @@ img {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 28px;
-  margin-top: 44px;
+  margin-top: 58px;
 }
 
 .showcase-panel {
   position: relative;
-  min-height: 420px;
+  min-height: 440px;
   border: 1px solid var(--line);
   overflow: hidden;
   background: #0a0a0a;
+}
+
+.showcase-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.22);
+  z-index: 2;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.showcase-panel:hover::after {
+  opacity: 0.08;
 }
 
 .showcase-copy {
   position: absolute;
   z-index: 3;
   inset: auto auto 0 0;
-  width: min(82%, 760px);
-  padding: 32px 26px 28px;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.24));
+  width: min(84%, 760px);
+  padding: 34px 28px 30px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.76), rgba(0, 0, 0, 0.24));
 }
 
 .showcase-eyebrow {
@@ -393,11 +418,27 @@ img {
   text-transform: uppercase;
 }
 
-.showcase-copy p:last-child {
+.showcase-copy p {
   margin: 0;
   color: rgba(243, 238, 230, 0.86);
   font-size: 15px;
   line-height: 1.8;
+}
+
+.showcase-link {
+  display: inline-flex;
+  margin-top: 18px;
+  color: var(--foreground);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.84;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.showcase-link:hover {
+  opacity: 1;
+  transform: translateX(2px);
 }
 
 /* SLIDER */
@@ -420,7 +461,7 @@ img {
 .hero-slider-card {
   position: relative;
   flex: 0 0 clamp(260px, 26vw, 340px);
-  height: clamp(420px, 46vw, 520px);
+  height: clamp(440px, 46vw, 540px);
   overflow: hidden;
   background: #111;
 }
@@ -428,7 +469,7 @@ img {
 .hero-slider-image {
   width: 100%;
   height: 100%;
-  background-size: 110% auto;
+  background-size: 108% auto;
   background-repeat: no-repeat;
   background-position: center 58%;
   transform: scale(1.02);
@@ -448,6 +489,53 @@ img {
   }
 }
 
+/* LIFESTYLE */
+
+.lifestyle-section {
+  padding: 92px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.lifestyle-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, 470px) minmax(0, 1fr);
+  gap: 34px;
+  align-items: stretch;
+}
+
+.lifestyle-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.lifestyle-image {
+  min-height: 500px;
+  border: 1px solid var(--line);
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.08)),
+    url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=80");
+  background-size: cover;
+  background-position: center;
+}
+
+/* POSITIONING STRIP */
+
+.positioning-strip {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.positioning-strip p {
+  margin: 0;
+  text-align: center;
+  color: var(--muted-strong);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 /* SEÇÕES INFERIORES */
 
 .container {
@@ -460,7 +548,7 @@ img {
 .home-intro,
 .curation-section,
 .home-highlight {
-  padding: 86px 0;
+  padding: 92px 0;
   border-bottom: 1px solid var(--line);
 }
 
@@ -536,7 +624,7 @@ img {
 
 .highlight-box {
   border: 1px solid var(--line);
-  padding: 56px 28px;
+  padding: 60px 28px;
   text-align: center;
   background:
     radial-gradient(circle at top center, rgba(180, 125, 54, 0.08), transparent 26%),
@@ -615,6 +703,7 @@ img {
     width: min(88%, 760px);
   }
 
+  .lifestyle-grid,
   .home-intro-grid {
     grid-template-columns: 1fr;
   }
@@ -632,7 +721,7 @@ img {
 
   .brand-logo {
     font-size: clamp(1.4rem, 5vw, 2rem);
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
     max-width: 56vw;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -644,22 +733,22 @@ img {
   }
 
   .hero-home-content--catalog {
-    padding: 52px 16px 28px;
+    padding: 72px 16px 34px;
   }
 
   .hero-description {
-    margin-top: 18px;
+    margin-top: 20px;
     font-size: 1rem;
     line-height: 1.75;
   }
 
   .hero-showcase-grid {
     grid-template-columns: 1fr;
-    margin-top: 34px;
+    margin-top: 42px;
   }
 
   .showcase-panel {
-    min-height: 360px;
+    min-height: 380px;
   }
 
   .showcase-copy {
@@ -674,7 +763,7 @@ img {
 
   .hero-slider-card {
     flex: 0 0 min(74vw, 300px);
-    height: 400px;
+    height: 410px;
   }
 
   .hero-slider-image {
@@ -682,18 +771,23 @@ img {
     background-position: center 58%;
   }
 
+  .lifestyle-section,
+  .home-intro,
+  .curation-section,
+  .home-highlight {
+    padding: 68px 0;
+  }
+
+  .lifestyle-image {
+    min-height: 380px;
+  }
+
   .container {
     padding: 0 16px;
   }
 
-  .home-intro,
-  .curation-section,
-  .home-highlight {
-    padding: 64px 0;
-  }
-
   .highlight-box {
-    padding: 42px 18px;
+    padding: 44px 18px;
   }
 }
 
@@ -728,8 +822,8 @@ img {
   }
 
   .brand-logo {
-    font-size: 1.15rem;
-    letter-spacing: 0.16em;
+    font-size: 1.12rem;
+    letter-spacing: 0.14em;
     max-width: 48vw;
   }
 
@@ -739,8 +833,8 @@ img {
   }
 
   .hero-home h1 {
-    font-size: clamp(2.2rem, 11vw, 3.6rem);
-    letter-spacing: 0.06em;
+    font-size: clamp(2.4rem, 11vw, 3.9rem);
+    letter-spacing: 0.04em;
   }
 
   .hero-description {
@@ -749,14 +843,14 @@ img {
   }
 
   .showcase-panel {
-    min-height: 340px;
+    min-height: 350px;
   }
 
   .showcase-copy {
     padding: 20px 16px 18px;
   }
 
-  .showcase-copy p:last-child {
+  .showcase-copy p {
     font-size: 14px;
     line-height: 1.75;
   }
@@ -773,6 +867,15 @@ img {
   .hero-slider-image {
     background-size: cover;
     background-position: center 56%;
+  }
+
+  .lifestyle-image {
+    min-height: 300px;
+  }
+
+  .positioning-strip p {
+    font-size: 12px;
+    line-height: 1.7;
   }
 
   .section-heading {

@@ -69,7 +69,7 @@ const curationPoints = [
   {
     title: "Leitura internacional",
     description:
-      "Produtos com estética adequada a públicos interessados em design e sofisticação.",
+      "Produtos escolhidos por sua capacidade de dialogar com públicos sofisticados ao redor do mundo.",
   },
 ];
 
@@ -109,6 +109,7 @@ export default function HomePage() {
       <Navbar />
 
       <section className="hero-home hero-home--catalog">
+        <div className="hero-home-editorial-image" />
         <div className="hero-home-overlay" />
 
         <div className="hero-home-content hero-home-content--catalog">
@@ -117,8 +118,7 @@ export default function HomePage() {
           <h1>D’OUTRO LADO</h1>
 
           <p className="hero-description">
-            Conectando produtos brasileiros exclusivos a pessoas interessadas ao
-            redor do mundo.
+            Curadoria brasileira para um público global.
           </p>
 
           <div className="hero-showcase-grid">
@@ -133,6 +133,10 @@ export default function HomePage() {
                   sapatos sociais, óculos de sol, carteiras e nécessaires em uma
                   seleção moderna, elegante e sem marcas aparentes.
                 </p>
+
+                <Link href="/produtos/moda-neutra-couro-e-acessorios" className="showcase-link">
+                  Explorar
+                </Link>
               </div>
 
               <SliderTrack slides={fashionSlides} blockClass="slider-fashion" />
@@ -149,11 +153,45 @@ export default function HomePage() {
                   enxoval apresentados com estética minimalista, refinada e
                   acolhedora.
                 </p>
+
+                <Link href="/produtos/ceramica-decoracao-e-casa" className="showcase-link">
+                  Explorar
+                </Link>
               </div>
 
               <SliderTrack slides={homeSlides} blockClass="slider-home" />
             </section>
           </div>
+        </div>
+      </section>
+
+      <section className="lifestyle-section">
+        <div className="container">
+          <div className="lifestyle-grid">
+            <div className="lifestyle-copy">
+              <p className="section-eyebrow">Atmosfera</p>
+
+              <h2 className="section-heading">
+                Produtos brasileiros apresentados com direção visual sofisticada
+              </h2>
+
+              <p className="section-copy">
+                Moda, couro, cerâmica e decoração reunidos em uma linguagem
+                silenciosa, elegante e contemporânea.
+              </p>
+            </div>
+
+            <div className="lifestyle-image" />
+          </div>
+        </div>
+      </section>
+
+      <section className="positioning-strip">
+        <div className="container">
+          <p>
+            Seleção pensada para clientes, boutiques e compradores com leitura
+            internacional.
+          </p>
         </div>
       </section>
 
