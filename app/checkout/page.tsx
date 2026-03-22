@@ -1,40 +1,66 @@
 "use client";
 
 import { useState } from "react";
-import { apiPost } from "../../services/api";
+import Navbar from "../../components/Navbar";
 
 export default function CheckoutPage() {
-  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [country, setCountry] = useState("");
+  const [notes, setNotes] = useState("");
 
-  const handleCheckout = async () => {
-    setLoading(true);
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
 
-    try {
-      const response = await apiPost<{ url: string }>("/checkout", {
-        items: [
-          {
-            id: 101,
-            quantity: 1,
-          },
-        ],
-        currency: "EUR",
-      });
+    const order = {
+      id: Date.now(),
+      buyer: {
+        name,
+        country,
+      },
+      notes,
+      createdAt: new Date().toISOString(),
+    };
 
-      window.location.href = response.url;
-    } catch (error) {
-      console.error("Erro no checkout", error);
-    }
+    console.log(order);
 
-    setLoading(false);
-  };
+    alert("Pedido enviado (simulação)");
+  }
 
   return (
-    <main style={{ padding: "40px" }}>
-      <h1>Checkout</h1>
+    <main className="site-shell">
+      <Navbar />
 
-      <button onClick={handleCheckout} disabled={loading}>
-        {loading ? "Redirecionando..." : "Pagar com Stripe"}
-      </button>
+      <section className="checkout-section">
+        <div className="checkout-box">
+          <h1>Solicitar cotação</h1>
+
+          <form onSubmit={handleSubmit} className="checkout-form">
+            <input
+              placeholder="Nome ou empresa"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+
+            <input
+              placeholder="País"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              required
+            />
+
+            <textarea
+              placeholder="Detalhes do pedido"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+            />
+
+            <button type="submit" className="primary-cta">
+              Enviar pedido
+            </button>
+          </form>
+        </div>
+      </section>
     </main>
   );
 }
