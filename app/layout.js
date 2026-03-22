@@ -1,12 +1,21 @@
-import { UserProvider } from "../context/UserContext";
+import "./globals.css";
+import type { Metadata } from "next";
+import Providers from "./providers";
 
-export default function RootLayout({ children }) {
+export const metadata: Metadata = {
+  title: "D’Outro Lado",
+  description: "Curadoria brasileira premium para exportação.",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="pt-BR">
       <body>
-        <UserProvider>
-          {children}
-        </UserProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

@@ -1,12 +1,22 @@
-"use client";
+import "./globals.css";
+import type { Metadata } from "next";
+import Providers from "./providers";
 
-import type { ReactNode } from "react";
-import { CartProvider } from "../context/CartContext";
-
-type ProvidersProps = {
-  children: ReactNode;
+export const metadata: Metadata = {
+  title: "D’Outro Lado",
+  description: "Curadoria brasileira premium para exportação.",
 };
 
-export default function Providers({ children }: ProvidersProps) {
-  return <CartProvider>{children}</CartProvider>;
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="pt-BR">
+      <body>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
 }
