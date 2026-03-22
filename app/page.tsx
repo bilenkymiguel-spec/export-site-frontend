@@ -4,23 +4,23 @@ import Link from "next/link";
 const fashionSlides = [
   {
     image:
-      "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=1200&q=80",
-    alt: "Bolsa de couro premium em composição editorial",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=1200&q=80",
-    alt: "Acessórios premium em composição sofisticada",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1548883354-94bcfe321cbb?auto=format&fit=crop&w=1200&q=80",
-    alt: "Produto de couro em contexto premium",
+      "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=1200&q=80",
+    alt: "Bolsa de couro premium em composição minimalista",
   },
   {
     image:
       "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1200&q=80",
-    alt: "Bolsa de couro com estética refinada",
+    alt: "Bolsa elegante em couro com estética sofisticada",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1200&q=80",
+    alt: "Calçado com acabamento refinado em composição editorial",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
+    alt: "Acessórios e moda neutra com styling minimalista",
   },
 ];
 
@@ -32,13 +32,13 @@ const homeSlides = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
-    alt: "Ambiente de casa com objetos decorativos elegantes",
+      "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1200&q=80",
+    alt: "Mesa posta minimalista com objetos refinados",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1200&q=80",
-    alt: "Mesa posta com decoração premium",
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+    alt: "Ambiente de casa com decoração moderna e elegante",
   },
   {
     image:
@@ -51,17 +51,17 @@ const curationPoints = [
   {
     title: "Exclusividade",
     description:
-      "Seleção orientada por singularidade, identidade e diferenciação real no repertório visual e material.",
+      "Seleção orientada por identidade, singularidade e valor percebido elevado.",
   },
   {
     title: "Acabamento",
     description:
-      "Atenção a qualidade percebida, matéria-prima, execução e consistência estética em cada peça apresentada.",
+      "Foco em matéria-prima, execução, refinamento visual e consistência estética.",
   },
   {
     title: "Linguagem internacional",
     description:
-      "Produtos com potencial de leitura premium para públicos interessados em design, autenticidade e sofisticação.",
+      "Produtos com leitura contemporânea para públicos interessados em design, autenticidade e sofisticação.",
   },
 ];
 
@@ -114,10 +114,10 @@ export default function HomePage() {
             <section className="showcase-panel">
               <div className="showcase-copy">
                 <p className="showcase-eyebrow">Seleção</p>
-                <h2>Moda casual, couro e acessórios</h2>
+                <h2>Moda neutra, couro e acessórios</h2>
                 <p>
-                  Peças com acabamento refinado, identidade brasileira e leitura
-                  internacional sofisticada.
+                  Bolsas, calçados, acessórios e peças com linguagem moderna,
+                  elegante e minimalista.
                 </p>
               </div>
 
@@ -127,10 +127,10 @@ export default function HomePage() {
             <section className="showcase-panel">
               <div className="showcase-copy">
                 <p className="showcase-eyebrow">Seleção</p>
-                <h2>Cerâmica, decoração, casa</h2>
+                <h2>Cerâmica, decoração, casa e cozinha</h2>
                 <p>
-                  Objetos e composições autorais para um repertório visual
-                  elegante, acolhedor e atemporal.
+                  Objetos e composições minimalistas para uma leitura refinada,
+                  contemporânea e acolhedora.
                 </p>
               </div>
 
@@ -203,17 +203,23 @@ export default function HomePage() {
             <div className="presence-stats">
               <div className="presence-stat-card">
                 <span>Moda</span>
-                <strong>Couro, acessórios e peças casuais refinadas</strong>
+                <strong>
+                  Couro, acessórios, crochê sofisticado e peças casuais refinadas
+                </strong>
               </div>
 
               <div className="presence-stat-card">
                 <span>Casa</span>
-                <strong>Cerâmica, decoração e objetos com valor autoral</strong>
+                <strong>
+                  Cerâmica, decoração, cozinha e objetos com valor autoral
+                </strong>
               </div>
 
               <div className="presence-stat-card">
                 <span>Contato</span>
-                <strong>Uma porta de entrada elegante para conversas comerciais</strong>
+                <strong>
+                  Uma porta de entrada elegante para conversas comerciais
+                </strong>
               </div>
             </div>
           </div>
@@ -229,9 +235,9 @@ export default function HomePage() {
               produção brasileira
             </h2>
             <p className="section-copy narrow">
-              Moda, acessórios, couro, cerâmica e objetos para casa apresentados
-              com direção visual consistente, curadoria elegante e apelo
-              internacional.
+              Moda, acessórios, couro, crochê, cerâmica e objetos para casa
+              apresentados com direção visual consistente, curadoria elegante e
+              apelo internacional.
             </p>
 
             <div className="highlight-actions">
