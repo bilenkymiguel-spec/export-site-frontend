@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import Link from "next/link";
 
 const fashionSlides = [
   {
@@ -43,6 +44,24 @@ const homeSlides = [
     image:
       "https://images.unsplash.com/photo-1484101403633-562f891dc89a?auto=format&fit=crop&w=1200&q=80",
     alt: "Interior minimalista com objetos de design",
+  },
+];
+
+const curationPoints = [
+  {
+    title: "Exclusividade",
+    description:
+      "Seleção orientada por singularidade, identidade e diferenciação real no repertório visual e material.",
+  },
+  {
+    title: "Acabamento",
+    description:
+      "Atenção a qualidade percebida, matéria-prima, execução e consistência estética em cada peça apresentada.",
+  },
+  {
+    title: "Linguagem internacional",
+    description:
+      "Produtos com potencial de leitura premium para públicos interessados em design, autenticidade e sofisticação.",
   },
 ];
 
@@ -141,6 +160,66 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="curation-section">
+        <div className="container">
+          <div className="section-header curation-section-header">
+            <p className="section-eyebrow">Curadoria</p>
+            <h2 className="section-heading">
+              Critérios que orientam cada seleção apresentada
+            </h2>
+            <p className="section-copy curation-copy">
+              A plataforma não busca volume. A proposta é apresentar produtos
+              com identidade, repertório visual consistente e valor percebido
+              elevado para públicos que apreciam exclusividade.
+            </p>
+          </div>
+
+          <div className="curation-grid">
+            {curationPoints.map((point) => (
+              <article key={point.title} className="curation-card">
+                <h3>{point.title}</h3>
+                <p>{point.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="presence-section">
+        <div className="container">
+          <div className="presence-grid">
+            <div className="presence-copy-block">
+              <p className="section-eyebrow">Alcance</p>
+              <h2 className="section-heading">
+                Conexão entre criação brasileira e interesse internacional
+              </h2>
+              <p className="section-copy">
+                A D’Outro Lado foi pensada para apresentar produtos brasileiros
+                exclusivos a um público global interessado em design,
+                autenticidade, matéria e presença estética.
+              </p>
+            </div>
+
+            <div className="presence-stats">
+              <div className="presence-stat-card">
+                <span>Moda</span>
+                <strong>Couro, acessórios e peças casuais refinadas</strong>
+              </div>
+
+              <div className="presence-stat-card">
+                <span>Casa</span>
+                <strong>Cerâmica, decoração e objetos com valor autoral</strong>
+              </div>
+
+              <div className="presence-stat-card">
+                <span>Contato</span>
+                <strong>Uma porta de entrada elegante para conversas comerciais</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="home-highlight">
         <div className="container">
           <div className="highlight-box">
@@ -154,6 +233,16 @@ export default function HomePage() {
               com direção visual consistente, curadoria elegante e apelo
               internacional.
             </p>
+
+            <div className="highlight-actions">
+              <Link href="/contato" className="secondary-cta">
+                Entrar em contato
+              </Link>
+
+              <Link href="/checkout" className="primary-cta">
+                Demonstrar interesse
+              </Link>
+            </div>
           </div>
         </div>
       </section>

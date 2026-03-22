@@ -495,6 +495,93 @@ textarea {
   align-items: start;
 }
 
+/* CURATION */
+.curation-section {
+  padding: 10px 0 88px;
+}
+
+.curation-section-header {
+  max-width: 900px;
+}
+
+.curation-copy {
+  max-width: 760px;
+}
+
+.curation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.curation-card {
+  border: 1px solid var(--color-border);
+  background: linear-gradient(180deg, #111111 0%, #0c0c0c 100%);
+  padding: 28px 24px;
+}
+
+.curation-card h3 {
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.curation-card p {
+  margin-top: 14px;
+  color: #d2cbc0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* PRESENCE */
+.presence-section {
+  padding: 0 0 88px;
+}
+
+.presence-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.presence-copy-block,
+.presence-stat-card {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.presence-copy-block {
+  padding: 32px 28px;
+}
+
+.presence-stats {
+  display: grid;
+  gap: 16px;
+}
+
+.presence-stat-card {
+  padding: 24px;
+}
+
+.presence-stat-card span {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.presence-stat-card strong {
+  display: block;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* HIGHLIGHT */
 .home-highlight {
   padding: 0 0 88px;
 }
@@ -504,6 +591,15 @@ textarea {
   background: linear-gradient(180deg, #101010 0%, #0b0b0b 100%);
   padding: 48px 32px;
   text-align: center;
+}
+
+.highlight-actions {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
 }
 
 /* BOTÕES GERAIS */
@@ -657,7 +753,9 @@ footer {
 }
 
 @media (max-width: 1100px) {
-  .hero-showcase-grid {
+  .hero-showcase-grid,
+  .presence-grid,
+  .curation-grid {
     grid-template-columns: 1fr;
   }
 
@@ -738,6 +836,15 @@ footer {
   .section-heading,
   .checkout-header h1 {
     font-size: 28px;
+  }
+
+  .curation-section {
+    padding: 0 0 56px;
+  }
+
+  .presence-section,
+  .home-highlight {
+    padding: 0 0 56px;
   }
 
   .highlight-box {
