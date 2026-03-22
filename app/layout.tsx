@@ -1,10 +1,9 @@
-import type { Metadata } from "next";
-import { CartProvider } from "@/context/CartContext";
 import "./globals.css";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "D’Outro Lado",
-  description: "E-commerce premium internacional com curadoria brasileira.",
+  description: "Curadoria brasileira premium para exportação.",
 };
 
 export default function RootLayout({
@@ -14,9 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body>
-        <CartProvider>{children}</CartProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
