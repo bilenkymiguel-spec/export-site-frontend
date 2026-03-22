@@ -1,69 +1,111 @@
-import Navbar from "../../../components/Navbar";
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllCategories, getCategoryBySlug } from "../../../data/categoryData";
+import { useEffect, useMemo, useState } from "react";
+import { getProductBySlug } from "../../../src/data/catalogData";
+import {
+  convertFromBRL,
+  detectCurrency,
+  formatCurrency,
+  type CurrencyCode,
+} from "../../../src/utils/intl";
 
-type PageProps = {
+type Props = {
   params: {
     slug: string;
   };
 };
 
-export function generateStaticParams() {
-  return getAllCategories().map((category) => ({
-    slug: category.slug,
-  }));
-}
+export default function ProductPage({ params }: Props) {
+  const product = getProductBySlug(params.slug);
+  const [activeImage, setActiveImage] = useState(0);
+  const [currency, setCurrency] = useState<CurrencyCode>("BRL");
 
-export default function CategoriaPage({ params }: PageProps) {
-  const category = getCategoryBySlug(params.slug);
+  useEffect(() => {
+    const locale = navigator.language || "pt-BR";
+    const inferredCountry = locale.split("-")[1]?.toUpperCase() || "BR";
+    setCurrency(detectCurrency(inferredCountry));
+  }, []);
 
-  if (!category) {
+  const convertedPrice = useMemo(() => {
+    if (!product) return 0;
+    return convertFromBRL(product.priceBRL, currency);
+  }, [product, currency]);
+
+  if (!product) {
     notFound();
   }
 
   return (
-    <main className="site-shell">
-      <Navbar />
-
-      <section className="category-hero">
-        <div
-          className="category-hero-image"
-          style={{ backgroundImage: `url(${category.heroImage})` }}
-        />
-        <div className="category-hero-overlay" />
-
-        <div className="container category-hero-content">
-          <p className="section-eyebrow">{category.eyebrow}</p>
-          <h1 className="internal-title">{category.shortTitle}</h1>
-          <p className="internal-description">{category.description}</p>
-        </div>
-      </section>
-
-      <section className="internal-section">
-        <div className="container">
-          <div className="section-header">
-            <p className="section-eyebrow">Curadoria</p>
-            <h2 className="section-heading">Linhas selecionadas</h2>
+    <main className="page-shell">
+      <section className="product-detail-shell">
+        <div className="product-gallery">
+          <div className="product-main-image">
+            <Image
+              src={product.gallery[activeImage]}
+              alt={product.name}
+              fill
+              className="product-main-image-el"
+            />
           </div>
 
-          <div className="product-grid">
-            {category.items.map((item) => (
-              <article key={item.name} className="product-card">
-                <div className="product-card-top" />
-                <h3>{item.name}</h3>
-                <p>{item.description}</p>
-              </article>
+          <div className="product-thumb-row">
+            {product.gallery.map((image, index) => (
+              <button
+                key={image}
+                type="button"
+                className={`product-thumb ${activeImage === index ? "is-active" : ""}`}
+                onClick={() => setActiveImage(index)}
+              >
+                <Image src={image} alt={`${product.name} ${index + 1}`} fill className="product-thumb-image" />
+              </button>
             ))}
           </div>
+        </div>
 
-          <div className="internal-actions">
-            <Link href="/checkout" className="primary-cta">
-              Demonstrar interesse
+        <div className="product-info">
+          <span className="section-kicker">Product</span>
+          <h1 className="page-title">{product.name}</h1>
+
+          <div className="product-price-row">
+            <strong>{formatCurrency(convertedPrice, currency)}</strong>
+            <span>International pricing preview</span>
+          </div>
+
+          <p className="product-description">{product.description}</p>
+
+          <div className="product-purpose">
+            <h2>Why this product exists</h2>
+            <p>{product.purpose}</p>
+          </div>
+
+          <div className="product-meta">
+            <div>
+              <span>Origin</span>
+              <strong>{product.origin}</strong>
+            </div>
+            <div>
+              <span>Material</span>
+              <strong>{product.material}</strong>
+            </div>
+            <div>
+              <span>Production</span>
+              <strong>{product.production}</strong>
+            </div>
+            <div>
+              <span>Availability</span>
+              <strong>{product.availability}</strong>
+            </div>
+          </div>
+
+          <div className="product-actions">
+            <Link href="/checkout" className="primary-action">
+              Initiate order
             </Link>
-
-            <Link href="/contato" className="secondary-cta">
-              Entrar em contato
+            <Link href={`/produtos/${product.categorySlug}`} className="secondary-action">
+              Back to category
             </Link>
           </div>
         </div>

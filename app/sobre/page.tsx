@@ -1,75 +1,60 @@
-import Navbar from "../../components/Navbar";
-
 export default function SobrePage() {
   return (
-    <main className="site-shell">
-      <Navbar />
+    <main className="page-shell">
+      <section className="content-shell">
+        <span className="section-kicker">About</span>
+        <h1 className="page-title">We select objects that carry identity, not trends.</h1>
 
-      <section className="internal-hero">
-        <div className="container">
-          <p className="section-eyebrow">Sobre</p>
-          <h1 className="internal-title">Uma curadoria brasileira com leitura internacional</h1>
-          <p className="internal-description">
-            A D’Outro Lado apresenta produtos brasileiros exclusivos para pessoas,
-            boutiques e compradores interessados em design, autenticidade e sofisticação.
+        <div className="page-prose">
+          <p>
+            D&apos;OUTRO LADO is an independent curation platform created to connect
+            refined Brazilian products with international clients who value
+            design, authenticity and material quality.
           </p>
-        </div>
-      </section>
 
-      <section className="internal-section">
-        <div className="container">
-          <div className="content-grid">
-            <div>
-              <p className="section-eyebrow">Posicionamento</p>
-              <h2 className="section-heading">
-                Uma vitrine refinada da produção brasileira
-              </h2>
+          <p>
+            We work with a clear editorial standard: visual restraint, premium
+            execution, discreet presence and export potential.
+          </p>
+
+          <p>
+            Our focus is not mass retail. It is access. Access to Brazilian
+            objects that deserve international visibility without losing their
+            cultural clarity or formal elegance.
+          </p>
+
+          <div className="about-grid">
+            <div className="about-card">
+              <h2>Vision</h2>
+              <p>
+                Present Brazilian design with international discipline and premium
+                visual language.
+              </p>
             </div>
 
-            <div className="content-stack">
-              <p className="section-copy">
-                Nosso foco está em selecionar produtos com identidade visual forte,
-                acabamento consistente e potencial de leitura premium em mercados
-                internacionais.
-              </p>
-
-              <p className="section-copy">
-                A proposta não é volume. É direção estética, exclusividade e
-                apresentação cuidadosa, unindo Brasil, design e sofisticação.
+            <div className="about-card">
+              <h2>Curation</h2>
+              <p>
+                Select products with strong material identity, clean aesthetics
+                and no unnecessary visual noise.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
 
-      <section className="internal-section">
-        <div className="container">
-          <div className="section-header">
-            <p className="section-eyebrow">Critérios</p>
-            <h2 className="section-heading">O que orienta cada escolha</h2>
-          </div>
-
-          <div className="info-card-grid">
-            <article className="info-card">
-              <h3>Estética</h3>
+            <div className="about-card">
+              <h2>Brazil → World</h2>
               <p>
-                Produtos com presença visual elegante, silenciosa e contemporânea.
+                Build a direct bridge between local production and buyers abroad
+                without generic marketplace mediation.
               </p>
-            </article>
+            </div>
 
-            <article className="info-card">
-              <h3>Acabamento</h3>
+            <div className="about-card">
+              <h2>Criteria</h2>
               <p>
-                Seleção com foco em materialidade, percepção de qualidade e consistência.
+                Material quality, discreet sophistication, export compatibility
+                and coherent presentation.
               </p>
-            </article>
-
-            <article className="info-card">
-              <h3>Mercado</h3>
-              <p>
-                Leitura internacional para clientes que valorizam curadoria e design.
-              </p>
-            </article>
+            </div>
           </div>
         </div>
       </section>

@@ -1,79 +1,148 @@
 "use client";
 
-import Navbar from "../../components/Navbar";
-import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
+import {
+  detectCountryLabel,
+  detectCurrency,
+  type CurrencyCode,
+} from "../../src/utils/intl";
 
-export default function LoginPage() {
+export default function CheckoutPage() {
+  const [countryCode, setCountryCode] = useState("BR");
+  const [currency, setCurrency] = useState<CurrencyCode>("BRL");
+  const [form, setForm] = useState({
+    name: "",
+    company: "",
+    email: "",
+    country: "",
+    phone: "",
+    notes: "",
+  });
+
+  useEffect(() => {
+    const locale = navigator.language || "pt-BR";
+    const inferredCountry = locale.split("-")[1]?.toUpperCase() || "BR";
+    const inferredCurrency = detectCurrency(inferredCountry);
+
+    setCountryCode(inferredCountry);
+    setCurrency(inferredCurrency);
+    setForm((prev) => ({
+      ...prev,
+      country: detectCountryLabel(inferredCountry),
+    }));
+  }, []);
+
+  const summary = useMemo(() => {
+    return {
+      shippingTo: detectCountryLabel(countryCode),
+      currency,
+    };
+  }, [countryCode, currency]);
+
+  function handleChange(
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    const { name, value } = event.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  }
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    alert("Order request captured successfully.");
+  }
+
   return (
-    <main className="site-shell">
-      <Navbar />
+    <main className="page-shell">
+      <section className="checkout-shell">
+        <div className="checkout-main">
+          <span className="section-kicker">Checkout</span>
+          <h1 className="page-title">Initiate your order</h1>
+          <p className="page-intro">
+            Complete the form below to begin your order request with international
+            shipping context and premium product handling.
+          </p>
 
-      <section className="page-section">
-        <div className="page-container page-container-narrow">
-          <header className="page-header page-header-center">
-            <p className="section-eyebrow">Acesso</p>
-            <h1 className="page-title luxury-title">Login</h1>
-            <p className="page-text page-text-center">
-              Acesse sua conta para acompanhar pedidos, interesses e informações
-              da sua seleção.
-            </p>
-          </header>
+          <form className="checkout-form" onSubmit={handleSubmit}>
+            <div className="checkout-grid">
+              <label>
+                Full name
+                <input name="name" value={form.name} onChange={handleChange} required />
+              </label>
 
-          <div className="panel-card auth-panel">
-            <form className="auth-form">
-              <div className="form-field">
-                <label htmlFor="email" className="form-label">
-                  E-mail
-                </label>
+              <label>
+                Company
+                <input name="company" value={form.company} onChange={handleChange} />
+              </label>
+
+              <label>
+                Email
                 <input
-                  id="email"
+                  name="email"
                   type="email"
-                  className="form-input"
-                  placeholder="seuemail@exemplo.com"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
                 />
-              </div>
+              </label>
 
-              <div className="form-field">
-                <label htmlFor="password" className="form-label">
-                  Senha
-                </label>
+              <label>
+                Country
                 <input
-                  id="password"
-                  type="password"
-                  className="form-input"
-                  placeholder="Digite sua senha"
+                  name="country"
+                  value={form.country}
+                  onChange={handleChange}
+                  required
                 />
-              </div>
+              </label>
 
-              <div className="auth-meta-row">
-                <label className="checkbox-line">
-                  <input type="checkbox" />
-                  <span>Manter conectado</span>
-                </label>
-
-                <Link href="/contato" className="text-link">
-                  Esqueceu a senha?
-                </Link>
-              </div>
-
-              <button type="submit" className="primary-cta full-width">
-                Entrar
-              </button>
-            </form>
-
-            <div className="divider-line" />
-
-            <div className="auth-footer">
-              <p className="page-text page-text-center auth-footer-text">
-                Ainda não possui acesso?
-              </p>
-
-              <Link href="/contato" className="secondary-cta full-width">
-                Solicitar atendimento
-              </Link>
+              <label>
+                Phone
+                <input name="phone" value={form.phone} onChange={handleChange} />
+              </label>
             </div>
-          </div>
+
+            <label className="checkout-notes">
+              Notes
+              <textarea
+                name="notes"
+                rows={5}
+                value={form.notes}
+                onChange={handleChange}
+                placeholder="Product quantity, destination details, wholesale request or delivery notes."
+              />
+            </label>
+
+            <button type="submit" className="primary-action">
+              Submit order request
+            </button>
+          </form>
         </div>
+
+        <aside className="checkout-sidebar">
+          <div className="checkout-summary-card">
+            <span className="section-kicker">International summary</span>
+            <ul className="checkout-summary-list">
+              <li>
+                <span>Shipping to</span>
+                <strong>{summary.shippingTo}</strong>
+              </li>
+              <li>
+                <span>Currency</span>
+                <strong>{summary.currency}</strong>
+              </li>
+            </ul>
+          </div>
+
+          <div className="checkout-trust-card">
+            <span className="section-kicker">Confidence</span>
+            <ul className="checkout-trust-list">
+              <li>Secure international payment</li>
+              <li>We ship worldwide</li>
+              <li>Taxes calculated at checkout</li>
+              <li>Premium handling for selected products</li>
+            </ul>
+          </div>
+        </aside>
       </section>
     </main>
   );
