@@ -1,6 +1,6 @@
-import type { AdminUser } from "../types/admin";
+import type { AdminUser } from "@/types/admin";
 
-export function canAccessGovernance(user?: AdminUser | null) {
+export function canAccessGovernance(user?: AdminUser | null): boolean {
   if (!user) return false;
 
   return user.role === "admin" || user.role === "super_admin";
