@@ -77,22 +77,51 @@ export default function Navbar() {
       <header className="site-header">
         <div className="site-header-top">CURADORIA BRASILEIRA</div>
 
-        <div className="site-header-bar">
+        <div
+          className="site-header-bar"
+          style={{
+            position: "relative",
+            minHeight: "84px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
           <button
             type="button"
             className="header-circle-button"
             aria-label="Abrir menu"
             aria-expanded={isOpen}
             onClick={() => setIsOpen(true)}
+            style={{ position: "relative", zIndex: 2 }}
           >
             <MenuIcon />
           </button>
 
-          <Link href="/" className="brand-logo">
+          <Link
+            href="/"
+            className="brand-logo"
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: 1,
+              textAlign: "center",
+              whiteSpace: "nowrap",
+              fontFamily:
+                '"Cormorant Garamond", "Bodoni Moda", "Times New Roman", serif',
+              fontWeight: 400,
+              letterSpacing: "0.24em",
+            }}
+          >
             D’OUTRO LADO
           </Link>
 
-          <div className="header-actions">
+          <div
+            className="header-actions"
+            style={{ position: "relative", zIndex: 2 }}
+          >
             <Link href="/login" className="header-action-pill">
               <UserIcon />
               <span>Login</span>
