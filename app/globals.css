@@ -13,7 +13,7 @@
   --color-border: rgba(255, 255, 255, 0.12);
   --color-accent: #c6a96b;
   --container-width: 1400px;
-  --font-main: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-main: var(--font-body);
 }
 
 html,
@@ -90,9 +90,10 @@ textarea {
   top: 0;
   z-index: 60;
   width: 100%;
-  background: rgba(5, 5, 5, 0.96);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--color-border);
+  background: rgba(5, 5, 5, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .site-header-top {
@@ -101,19 +102,20 @@ textarea {
   justify-content: center;
   min-height: 34px;
   padding: 8px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   font-size: 11px;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--color-text-muted);
   text-align: center;
 }
 
 .site-header-bar {
+  position: relative;
   width: 100%;
   max-width: var(--container-width);
   margin: 0 auto;
-  min-height: 82px;
+  min-height: 86px;
   padding: 0 24px;
   display: grid;
   grid-template-columns: 64px 1fr auto;
@@ -122,18 +124,29 @@ textarea {
 }
 
 .brand-logo {
-  justify-self: center;
-  font-size: 22px;
-  letter-spacing: 0.28em;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
   font-weight: 500;
+  line-height: 1;
   white-space: nowrap;
+  text-align: center;
+  color: #f5f1ea;
+  transition: opacity 0.25s ease, transform 0.25s ease, letter-spacing 0.25s ease;
+}
+
+.brand-logo:hover {
+  opacity: 0.92;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .header-circle-button,
@@ -142,44 +155,54 @@ textarea {
   height: 44px;
   min-width: 44px;
   min-height: 44px;
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.01);
   color: var(--color-text);
-  transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    opacity 0.25s ease;
 }
 
 .header-circle-button:hover,
 .drawer-close-button:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
 }
 
 .header-action-pill {
   min-height: 44px;
   padding: 0 14px;
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   color: var(--color-text);
-  background: transparent;
-  transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+  background: rgba(255, 255, 255, 0.01);
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    opacity 0.25s ease;
 }
 
 .header-action-pill:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
 }
 
 .header-action-pill span {
-  font-size: 12px;
-  letter-spacing: 0.08em;
+  font-size: 11px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -345,7 +368,9 @@ textarea {
   background: linear-gradient(180deg, #121212 0%, #0c0c0c 100%);
   min-height: 520px;
   text-align: left;
-  transition: transform 0.35s ease, border-color 0.35s ease,
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
     box-shadow 0.35s ease;
 }
 
@@ -520,8 +545,11 @@ textarea {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  transition: opacity 0.2s ease, transform 0.2s ease,
-    background 0.2s ease, border-color 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .primary-cta,
@@ -679,12 +707,26 @@ footer {
   }
 
   .brand-logo {
-    font-size: 18px;
-    letter-spacing: 0.18em;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    letter-spacing: 0.16em;
+    max-width: calc(100vw - 132px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .header-action-pill {
+    min-height: 42px;
+    padding: 0 12px;
   }
 
   .header-action-pill span {
     display: none;
+  }
+
+  .header-actions {
+    gap: 8px;
   }
 
   .hero-home--catalog {
