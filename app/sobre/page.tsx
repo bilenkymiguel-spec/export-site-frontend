@@ -1,25 +1,11 @@
-import Navbar from "../../components/Navbar";
-
-export default function SobrePage() {
+export default function Sobre() {
   return (
-    <main className="site-shell">
-      <Navbar />
-
-      <section className="content-section">
-        <div className="content-box">
-          <h1>Sobre</h1>
-
-          <p>
-            D’Outro Lado é uma plataforma de curadoria de produtos brasileiros com
-            foco em exportação para mercados internacionais de alto padrão.
-          </p>
-
-          <p>
-            Selecionamos peças com identidade cultural, qualidade e potencial de
-            posicionamento premium.
-          </p>
-        </div>
-      </section>
+    <main className="page">
+      <h1>Sobre</h1>
+      <p>
+        A D’OUTRO LADO conecta produtos brasileiros de alta curadoria ao mercado internacional,
+        com foco em estética, autenticidade e valor cultural.
+      </p>
     </main>
   );
 }
