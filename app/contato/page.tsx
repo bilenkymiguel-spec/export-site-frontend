@@ -10,8 +10,8 @@ export default function ContatoPage() {
           <p className="section-eyebrow">Contato</p>
           <h1 className="inner-page-title">Entre em contato</h1>
           <p className="inner-page-description">
-            Estamos disponíveis para apresentar a curadoria, esclarecer dúvidas e
-            orientar os próximos passos.
+            Estamos disponíveis para apresentar a curadoria, esclarecer dúvidas
+            e orientar os próximos passos.
           </p>
         </div>
       </section>
@@ -23,7 +23,7 @@ export default function ContatoPage() {
               <p className="section-eyebrow">Atendimento</p>
               <h2 className="section-heading">Canal principal</h2>
               <p className="section-copy">
-                Telefone / WhatsApp
+                WhatsApp / Telefone
                 <br />
                 16 99197-7845
               </p>
@@ -31,10 +31,10 @@ export default function ContatoPage() {
 
             <article className="info-card">
               <p className="section-eyebrow">Mensagem</p>
-              <h2 className="section-heading">Apresentação do interesse</h2>
+              <h2 className="section-heading">Como avançar</h2>
               <p className="section-copy">
-                Informe a categoria desejada, tipo de produto e o seu interesse
-                comercial para avançarmos de forma objetiva.
+                Informe a categoria desejada, o tipo de produto e seu interesse
+                comercial para seguirmos com clareza e objetividade.
               </p>
             </article>
           </div>

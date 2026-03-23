@@ -12,7 +12,7 @@ export default function LoginPage() {
           <p className="section-eyebrow">Acesso</p>
           <h1 className="inner-page-title">Login</h1>
           <p className="inner-page-description">
-            Acesse sua área com uma apresentação visual alinhada ao padrão da
+            Acesse sua área com uma interface alinhada ao padrão visual da
             marca.
           </p>
         </div>

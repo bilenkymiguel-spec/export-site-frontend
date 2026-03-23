@@ -25,19 +25,19 @@ export default function SobrePage() {
               <p className="section-eyebrow">Essência</p>
               <h2 className="section-heading">Curadoria brasileira refinada</h2>
               <p className="section-copy">
-                A proposta da D’Outro Lado é conectar a produção brasileira com
-                um público que valoriza design, autenticidade, acabamento e
-                identidade estética.
+                A D’Outro Lado reúne uma seleção visualmente consistente de
+                produtos brasileiros com forte identidade estética, acabamento
+                cuidadoso e potencial de leitura internacional.
               </p>
             </article>
 
             <article className="info-card">
               <p className="section-eyebrow">Direção</p>
-              <h2 className="section-heading">Seleção com leitura premium</h2>
+              <h2 className="section-heading">Sofisticação com clareza</h2>
               <p className="section-copy">
-                Cada categoria é organizada para transmitir sofisticação,
-                clareza visual e consistência, evitando excesso de informação e
-                mantendo o foco no produto.
+                O projeto foi pensado para transmitir elegância, exclusividade e
+                organização, evitando excesso de informação e valorizando a
+                apresentação dos produtos.
               </p>
             </article>
           </div>
@@ -49,12 +49,11 @@ export default function SobrePage() {
           <div className="highlight-box">
             <p className="section-eyebrow">Posicionamento</p>
             <h2 className="section-heading">
-              Produtos com identidade, presença e potencial internacional
+              Produtos brasileiros com presença e leitura premium
             </h2>
             <p className="section-copy narrow">
-              Moda neutra, couro, crochê, acessórios, cerâmica, decoração e
-              enxoval apresentados com uma direção estética elegante e
-              consistente.
+              Moda neutra, couro, acessórios, cerâmica, decoração e enxoval
+              apresentados com uma direção visual elegante e padronizada.
             </p>
 
             <div className="highlight-actions">

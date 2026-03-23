@@ -3,38 +3,38 @@ import Navbar from "../../../components/Navbar";
 
 const products = [
   {
-    title: "Bolsas de crochê",
+    title: "Peças de decoração em cerâmica",
     description:
-      "Peças com textura artesanal e leitura contemporânea, pensadas para uma apresentação sofisticada.",
+      "Objetos com presença escultórica e leitura sofisticada para composições elegantes.",
   },
   {
-    title: "Bolsas de couro",
+    title: "Pratos",
     description:
-      "Modelos com visual limpo, acabamento refinado e estética neutra para diferentes mercados.",
+      "Cerâmicas com acabamento visual refinado e forte apelo estético.",
   },
   {
-    title: "Coturnos femininos",
+    title: "Xícaras",
     description:
-      "Calçados com presença visual, equilíbrio entre elegância e personalidade.",
+      "Peças delicadas e contemporâneas pensadas para um ambiente acolhedor e premium.",
   },
   {
-    title: "Sapatos sociais",
+    title: "Travessas",
     description:
-      "Linhas clássicas e modernas com foco em apresentação premium e versatilidade.",
+      "Itens de apresentação com equilíbrio entre funcionalidade e direção visual.",
   },
   {
-    title: "Óculos de sol",
+    title: "Enxoval",
     description:
-      "Acessórios de linguagem minimalista, ideais para composições sofisticadas.",
+      "Seleção de itens com linguagem minimalista, conforto visual e acabamento elegante.",
   },
   {
-    title: "Carteiras e nécessaires",
+    title: "Casa e decoração",
     description:
-      "Peças funcionais em couro com forte apelo visual e acabamento elegante.",
+      "Produtos voltados a interiores sofisticados, com estética limpa e atemporal.",
   },
 ];
 
-export default function ModaPage() {
+export default function CasaPage() {
   return (
     <main className="site-shell">
       <Navbar />
@@ -42,10 +42,10 @@ export default function ModaPage() {
       <section className="inner-hero">
         <div className="container">
           <p className="section-eyebrow">Categoria</p>
-          <h1 className="inner-page-title">Moda, estilo e acessórios</h1>
+          <h1 className="inner-page-title">Casa, cerâmica e decoração</h1>
           <p className="inner-page-description">
-            Uma seleção de moda neutra, couro e acessórios com linguagem visual
-            refinada, elegante e sem marcas aparentes.
+            Uma curadoria de peças para casa com estética minimalista, refinada
+            e acolhedora, valorizando cerâmica, decoração e enxoval.
           </p>
         </div>
       </section>
@@ -72,8 +72,8 @@ export default function ModaPage() {
               Solicite informações sobre esta curadoria
             </h2>
             <p className="section-copy narrow">
-              Entre em contato para manifestar interesse e avançar para a etapa
-              de atendimento.
+              Entre em contato para conhecer melhor a seleção e seguir para o
+              atendimento.
             </p>
 
             <div className="highlight-actions">

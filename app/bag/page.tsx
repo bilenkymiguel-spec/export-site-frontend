@@ -5,12 +5,12 @@ const bagItems = [
   {
     title: "Bolsa de couro",
     category: "Moda, estilo e acessórios",
-    note: "Peça selecionada para demonstração visual da bag.",
+    note: "Item de demonstração para a estrutura visual da bag.",
   },
   {
     title: "Travessa de cerâmica",
     category: "Casa, cerâmica e decoração",
-    note: "Item de exemplo para manter a estrutura pronta.",
+    note: "Peça de exemplo para manter a página pronta e elegante.",
   },
 ];
 
@@ -41,7 +41,7 @@ export default function BagPage() {
                     <p>{item.note}</p>
                   </div>
 
-                  <button className="secondary-cta bag-remove" type="button">
+                  <button type="button" className="secondary-cta bag-remove">
                     Remover
                   </button>
                 </article>
@@ -52,7 +52,7 @@ export default function BagPage() {
               <p className="section-eyebrow">Resumo</p>
               <h2 className="section-heading">Pronto para avançar</h2>
               <p className="section-copy">
-                Revise a sua seleção e siga para a etapa de demonstração de
+                Revise sua seleção e siga para a etapa de demonstração de
                 interesse.
               </p>
 
