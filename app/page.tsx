@@ -1,22 +1,25 @@
 import Navbar from "../components/Navbar";
-import Link from "next/link";
 
 const fashionSlides = [
   {
     image:
-      "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=1200&q=80",
+    alt: "Bolsa de couro premium em composição editorial",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=1200&q=80",
+    alt: "Acessórios premium em composição sofisticada",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1548883354-94bcfe321cbb?auto=format&fit=crop&w=1200&q=80",
+    alt: "Produto de couro em contexto premium",
   },
   {
     image:
       "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1516826957135-700dedea698c?auto=format&fit=crop&w=1200&q=80",
+    alt: "Bolsa de couro com estética refinada",
   },
 ];
 
@@ -24,36 +27,22 @@ const homeSlides = [
   {
     image:
       "https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1200&q=80",
+    alt: "Cerâmica e decoração em ambiente sofisticado",
   },
   {
     image:
       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+    alt: "Ambiente de casa com objetos decorativos elegantes",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1200&q=80",
+    alt: "Mesa posta com decoração premium",
   },
   {
     image:
       "https://images.unsplash.com/photo-1484101403633-562f891dc89a?auto=format&fit=crop&w=1200&q=80",
-  },
-];
-
-const curationPoints = [
-  {
-    title: "Exclusividade",
-    description:
-      "Seleção orientada por identidade, singularidade e diferenciação real.",
-  },
-  {
-    title: "Acabamento",
-    description:
-      "Foco em matéria-prima, execução e qualidade visual consistente.",
-  },
-  {
-    title: "Leitura internacional",
-    description:
-      "Produtos com estética adequada a públicos interessados em design e sofisticação.",
+    alt: "Interior minimalista com objetos de design",
   },
 ];
 
@@ -61,7 +50,7 @@ function SliderTrack({
   slides,
   blockClass,
 }: {
-  slides: { image: string }[];
+  slides: { image: string; alt: string }[];
   blockClass: string;
 }) {
   const duplicatedSlides = [...slides, ...slides];
@@ -70,10 +59,12 @@ function SliderTrack({
     <div className={`hero-slider-block ${blockClass}`}>
       <div className="hero-slider-track">
         {duplicatedSlides.map((slide, index) => (
-          <article key={index} className="hero-slider-card">
+          <article className="hero-slider-card" key={`${blockClass}-${index}`}>
             <div
               className="hero-slider-image"
               style={{ backgroundImage: `url(${slide.image})` }}
+              aria-label={slide.alt}
+              role="img"
             />
           </article>
         ))}
@@ -93,8 +84,7 @@ export default function HomePage() {
         <div className="hero-home-content hero-home-content--catalog">
           <p className="hero-kicker">Curadoria brasileira</p>
 
-          {/* MARCA COM MAIS ELEGÂNCIA */}
-          <h1 className="brand-title">D’OUTRO LADO</h1>
+          <h1>D’OUTRO LADO</h1>
 
           <p className="hero-description">
             Conectando produtos brasileiros exclusivos a pessoas interessadas ao
@@ -105,13 +95,10 @@ export default function HomePage() {
             <section className="showcase-panel">
               <div className="showcase-copy">
                 <p className="showcase-eyebrow">Seleção</p>
-
-                <h2>Moda neutra, couro e acessórios</h2>
-
+                <h2>Moda casual, couro e acessórios</h2>
                 <p>
-                  Bolsas de crochê, bolsas de couro, coturnos femininos,
-                  sapatos sociais, óculos de sol, carteiras e nécessaires em uma
-                  seleção moderna, elegante e sem marcas aparentes.
+                  Peças com acabamento refinado, identidade brasileira e leitura
+                  internacional sofisticada.
                 </p>
               </div>
 
@@ -121,13 +108,10 @@ export default function HomePage() {
             <section className="showcase-panel">
               <div className="showcase-copy">
                 <p className="showcase-eyebrow">Seleção</p>
-
-                <h2>Cerâmica, decoração e casa</h2>
-
+                <h2>Cerâmica, decoração, casa</h2>
                 <p>
-                  Peças de decoração em cerâmica, pratos, xícaras, travessas e
-                  enxoval apresentados com estética minimalista, refinada e
-                  acolhedora.
+                  Objetos e composições autorais para um repertório visual
+                  elegante, acolhedor e atemporal.
                 </p>
               </div>
 
@@ -137,52 +121,39 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CURADORIA */}
-      <section className="curation-section">
+      <section className="home-intro">
         <div className="container">
-          <div className="section-header">
-            <p className="section-eyebrow">Curadoria</p>
+          <div className="home-intro-grid">
+            <div>
+              <p className="section-eyebrow">Posicionamento</p>
+              <h2 className="section-heading">
+                Produtos brasileiros exclusivos apresentados com linguagem
+                premium
+              </h2>
+            </div>
 
-            <h2 className="section-heading">
-              Critérios que orientam cada seleção
-            </h2>
-          </div>
-
-          <div className="curation-grid">
-            {curationPoints.map((point) => (
-              <article key={point.title} className="curation-card">
-                <h3>{point.title}</h3>
-                <p>{point.description}</p>
-              </article>
-            ))}
+            <p className="section-copy">
+              A D’Outro Lado reúne produtos nacionais com forte apelo estético,
+              acabamento refinado e presença editorial, aproximando peças
+              exclusivas de compradores e interessados em diferentes mercados.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* ESSÊNCIA */}
       <section className="home-highlight">
         <div className="container">
           <div className="highlight-box">
-            <p className="section-eyebrow">Essência</p>
-
+            <p className="section-eyebrow">Essência da marca</p>
             <h2 className="section-heading">
-              Uma vitrine sofisticada da produção brasileira
+              Uma vitrine sofisticada para descobrir o melhor do design e da
+              produção brasileira
             </h2>
-
             <p className="section-copy narrow">
-              Moda, couro, crochê, acessórios, cerâmica, decoração e enxoval
-              apresentados com direção visual consistente e curadoria elegante.
+              Moda, acessórios, couro, cerâmica e objetos para casa apresentados
+              com direção visual consistente, curadoria elegante e apelo
+              internacional.
             </p>
-
-            <div className="highlight-actions">
-              <Link href="/contato" className="secondary-cta">
-                Entrar em contato
-              </Link>
-
-              <Link href="/checkout" className="primary-cta">
-                Demonstrar interesse
-              </Link>
-            </div>
           </div>
         </div>
       </section>
