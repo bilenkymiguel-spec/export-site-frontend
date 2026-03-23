@@ -81,6 +81,56 @@ function BagIcon() {
   );
 }
 
+function FashionIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="nav-svg">
+      <path
+        d="M9 5L10.5 3.5H13.5L15 5L17.5 6L16 10H8L6.5 6L9 5Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8 10V20H16V10"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function HomeCeramicIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="nav-svg">
+      <path
+        d="M5 11L12 5L19 11"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7 10.5V19H17V10.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10 19V14H14V19"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 type SearchSuggestion = {
   label: string;
   href: string;
@@ -113,6 +163,7 @@ export default function Navbar() {
   const fashionHref = fashionCategory
     ? `/produtos/${fashionCategory.slug}`
     : "/produtos";
+
   const homeHref = homeCategory ? `/produtos/${homeCategory.slug}` : "/produtos";
 
   const searchSuggestions: SearchSuggestion[] = [
@@ -239,15 +290,35 @@ export default function Navbar() {
         </div>
 
         <div className="site-header-bar">
-          <button
-            type="button"
-            className="header-circle-button"
-            aria-label="Abrir menu"
-            aria-expanded={isMenuOpen}
-            onClick={openMenu}
-          >
-            <MenuIcon />
-          </button>
+          <div className="header-left-group">
+            <button
+              type="button"
+              className="header-circle-button"
+              aria-label="Abrir menu"
+              aria-expanded={isMenuOpen}
+              onClick={openMenu}
+            >
+              <MenuIcon />
+            </button>
+
+            <Link
+              href={fashionHref}
+              className="header-circle-button"
+              aria-label="Moda e acessórios"
+              onClick={closeAll}
+            >
+              <FashionIcon />
+            </Link>
+
+            <Link
+              href={homeHref}
+              className="header-circle-button"
+              aria-label="Casa e cerâmica"
+              onClick={closeAll}
+            >
+              <HomeCeramicIcon />
+            </Link>
+          </div>
 
           <div className="site-header-spacer" aria-hidden="true" />
 
@@ -366,7 +437,9 @@ export default function Navbar() {
                     onClick={closeAll}
                   >
                     <span className="search-suggestion-label">{item.label}</span>
-                    <span className="search-suggestion-group">{item.group}</span>
+                    <span className="search-suggestion-group">
+                      {item.group}
+                    </span>
                   </Link>
                 ))}
               </div>
