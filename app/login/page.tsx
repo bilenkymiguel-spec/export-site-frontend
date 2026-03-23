@@ -1,47 +1,56 @@
 "use client";
 
+import { useState } from "react";
 import Navbar from "../../components/Navbar";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+
+  function handleLogin(e: React.FormEvent) {
+    e.preventDefault();
+
+    const user = {
+      id: Date.now(),
+      email,
+      name,
+      createdAt: new Date().toISOString(),
+    };
+
+    localStorage.setItem("user", JSON.stringify(user));
+
+    alert("Login realizado");
+  }
+
   return (
     <main className="site-shell">
       <Navbar />
 
-      <section className="inner-hero inner-hero--compact">
-        <div className="container">
-          <p className="section-eyebrow">Acesso</p>
-          <h1 className="inner-page-title">Login</h1>
-          <p className="inner-page-description">
-            Acesse sua área com uma interface alinhada ao padrão visual da
-            marca.
-          </p>
-        </div>
-      </section>
+      <section className="auth-section">
+        <div className="auth-box">
+          <h1>Login</h1>
 
-      <section className="content-section">
-        <div className="container form-shell">
-          <div className="form-card">
-            <div className="form-card-header">
-              <p className="section-eyebrow">Entrar</p>
-              <h2 className="section-heading">Bem-vindo de volta</h2>
-            </div>
+          <form onSubmit={handleLogin} className="auth-form">
+            <input
+              type="text"
+              placeholder="Nome"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
 
-            <form className="premium-form">
-              <label className="form-field">
-                <span>E-mail</span>
-                <input type="email" placeholder="seuemail@exemplo.com" />
-              </label>
+            <input
+              type="email"
+              placeholder="E-mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
 
-              <label className="form-field">
-                <span>Senha</span>
-                <input type="password" placeholder="Digite sua senha" />
-              </label>
-
-              <button type="submit" className="primary-cta form-submit">
-                Entrar
-              </button>
-            </form>
-          </div>
+            <button type="submit" className="primary-cta">
+              Entrar
+            </button>
+          </form>
         </div>
       </section>
     </main>
