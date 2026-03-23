@@ -1,4 +1,6 @@
+import Link from "next/link";
 import Navbar from "../components/Navbar";
+import { getAllCategories } from "../data/categoryData";
 
 const fashionSlides = [
   {
@@ -74,6 +76,21 @@ function SliderTrack({
 }
 
 export default function HomePage() {
+  const categories = getAllCategories();
+
+  const fashionCategory = categories.find((category) =>
+    /moda|acess[oó]rios|couro|estilo/i.test(category.title)
+  );
+
+  const homeCategory = categories.find((category) =>
+    /cer[aâ]mica|decora[cç][aã]o|casa/i.test(category.title)
+  );
+
+  const fashionHref = fashionCategory
+    ? `/produtos/${fashionCategory.slug}`
+    : "/produtos";
+  const homeHref = homeCategory ? `/produtos/${homeCategory.slug}` : "/produtos";
+
   return (
     <main className="site-shell">
       <Navbar />
@@ -92,7 +109,7 @@ export default function HomePage() {
           </p>
 
           <div className="hero-showcase-grid">
-            <section className="showcase-panel">
+            <Link href={fashionHref} className="showcase-panel showcase-link-panel">
               <div className="showcase-copy">
                 <p className="showcase-eyebrow">Seleção</p>
                 <h2>Moda casual, couro e acessórios</h2>
@@ -100,12 +117,13 @@ export default function HomePage() {
                   Peças com acabamento refinado, identidade brasileira e leitura
                   internacional sofisticada.
                 </p>
+                <span className="showcase-cta">Explorar categoria</span>
               </div>
 
               <SliderTrack slides={fashionSlides} blockClass="slider-fashion" />
-            </section>
+            </Link>
 
-            <section className="showcase-panel">
+            <Link href={homeHref} className="showcase-panel showcase-link-panel">
               <div className="showcase-copy">
                 <p className="showcase-eyebrow">Seleção</p>
                 <h2>Cerâmica, decoração, casa</h2>
@@ -113,10 +131,11 @@ export default function HomePage() {
                   Objetos e composições autorais para um repertório visual
                   elegante, acolhedor e atemporal.
                 </p>
+                <span className="showcase-cta">Explorar categoria</span>
               </div>
 
               <SliderTrack slides={homeSlides} blockClass="slider-home" />
-            </section>
+            </Link>
           </div>
         </div>
       </section>
